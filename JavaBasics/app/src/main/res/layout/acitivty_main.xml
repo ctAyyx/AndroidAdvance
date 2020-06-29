@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/btn_reflect"
+        android:layout_width="match_parent"
+        android:onClick="onClick"
+        android:text="反射作业-实现自动获取页面参数"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_reflect3"
+        android:layout_width="match_parent"
+        android:onClick="onClick"
+        android:text="反射作业-实现注入点击事件"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
