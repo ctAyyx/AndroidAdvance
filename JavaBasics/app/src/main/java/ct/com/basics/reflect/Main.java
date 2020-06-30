@@ -10,9 +10,8 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
-import java.util.List;
 
-import ct.com.basics.Log;
+import ct.com.basics.CLog;
 import ct.com.basics.reflect.vo.Person;
 import ct.com.basics.reflect.vo.TestType;
 import ct.com.basics.reflect.vo.Tom;
@@ -59,24 +58,24 @@ class Main {
         Class<?> cls;
         //第一种 通过调用对象的getClass方法获取
         cls = tom.getClass();
-        Log.log("通过对象调用getClass()方法获取的Class:" + cls.getName());
+        CLog.log("通过对象调用getClass()方法获取的Class:" + cls.getName());
 
         //第二种 通过类直接获取
         cls = Tom.class;
-        Log.log("通过类直接获取的Class:" + cls.getName());
+        CLog.log("通过类直接获取的Class:" + cls.getName());
         //第三种 通过对象的全类名获取
         try {
             cls = Class.forName("ct.com.basics.reflect.vo.Tom");
-            Log.log("通过全类名获取的Class:" + cls.getName());
+            CLog.log("通过全类名获取的Class:" + cls.getName());
         } catch (ClassNotFoundException e) {
 
         }
 
         //通过使用 isInstance 判断传入对象是否是该Class的一个实例或子类
-        Log.log("判断是否是Tom:" + Person.class.isInstance(tom));
+        CLog.log("判断是否是Tom:" + Person.class.isInstance(tom));
 
         //判断Class对象是否和传入的Class对象一致或子类
-        Log.log("Class对象是否和传入的Class对象一致:" + Person.class.isAssignableFrom(Tom.class));
+        CLog.log("Class对象是否和传入的Class对象一致:" + Person.class.isAssignableFrom(Tom.class));
 
     }
 
@@ -92,26 +91,26 @@ class Main {
             Constructor<?>[] constructors = cls.getConstructors();
 
             for (Constructor constructor : constructors) {
-                Log.log("获取Person类声明的公开的构造函数:" + constructor.getName() + "--获取权限修饰符" + Modifier.toString(constructor.getModifiers()));
+                CLog.log("获取Person类声明的公开的构造函数:" + constructor.getName() + "--获取权限修饰符" + Modifier.toString(constructor.getModifiers()));
             }
             Constructor constructor = cls.getConstructor(int.class, String.class);
             for (Class cls2 : constructor.getParameterTypes()) {
-                Log.log("获取指定的公开的构造方法:" + cls2.getName());
+                CLog.log("获取指定的公开的构造方法:" + cls2.getName());
             }
 
             Constructor<?>[] constructors2 = cls.getDeclaredConstructors();
             for (Constructor constructor2 : constructors2) {
-                Log.log("获取Person类声明的构造函数:" + constructor2.getName() + "--获取权限修饰符" + Modifier.toString(constructor2.getModifiers()));
+                CLog.log("获取Person类声明的构造函数:" + constructor2.getName() + "--获取权限修饰符" + Modifier.toString(constructor2.getModifiers()));
             }
             Constructor constructor2 = cls.getDeclaredConstructor(String.class, int.class, int.class);
             for (Class cls2 : constructor2.getParameterTypes()) {
-                Log.log("获取指定的构造方法:" + cls2.getName());
+                CLog.log("获取指定的构造方法:" + cls2.getName());
             }
 
 
             //构建对象
             Person person = (Person) cls.newInstance();
-            Log.log("通过Class.newInstance创建对象，只能创建有无参且公开的构造函数的对象" + person);
+            CLog.log("通过Class.newInstance创建对象，只能创建有无参且公开的构造函数的对象" + person);
 
             //通过获取指定构造函数穿件对象
             Constructor constructor3 = cls.getDeclaredConstructor(String.class, int.class, int.class);
@@ -119,9 +118,9 @@ class Main {
                 constructor3.setAccessible(true);//绕过安全检测
 
             Person person1 = (Person) constructor3.newInstance("反射创建", 10, 20);
-            Log.log("通过获取指定构造函数穿件对象" + person1);
+            CLog.log("通过获取指定构造函数穿件对象" + person1);
         } catch (Exception e) {
-            Log.log(e.getMessage());
+            CLog.log(e.getMessage());
         }
 
     }
@@ -137,7 +136,7 @@ class Main {
             //获取Class声明的所有公开字段 包括父类的公开字段
             Field[] fields = cls.getFields();
             for (Field field : fields) {
-                Log.log("获取Tom声明的公开字段:" + field.getName() +
+                CLog.log("获取Tom声明的公开字段:" + field.getName() +
                         "--字段的修饰符:" + Modifier.toString(field.getModifiers()) +
                         "--字段的类型" + field.getType().getName() +
                         "---字段声明的类:" + field.getDeclaringClass().getName()
@@ -147,7 +146,7 @@ class Main {
             Field[] declaredFields = cls.getDeclaredFields();
 
             for (Field field : declaredFields) {
-                Log.log("获取Tom声明的字段:" + field.getName() +
+                CLog.log("获取Tom声明的字段:" + field.getName() +
                         "--字段的修饰符:" + Modifier.toString(field.getModifiers()) +
                         "--字段的类型" + field.getType().getName() +
                         "---字段声明的类:" + field.getDeclaringClass().getName()
@@ -157,16 +156,16 @@ class Main {
 
             //反射修改对象的字段
             Person person = new Person(18, "学生");
-            Log.log("反射修改前:" + person);
+            CLog.log("反射修改前:" + person);
             Field field = cls.getDeclaredField("work");
             if (!field.isAccessible())
                 field.setAccessible(true);
             field.set(person, "打工仔");
-            Log.log("反射修改后:" + person);
+            CLog.log("反射修改后:" + person);
 
 
         } catch (Exception e) {
-            Log.log(e.getMessage());
+            CLog.log(e.getMessage());
         }
 
     }
@@ -183,13 +182,13 @@ class Main {
             Method[] methods = cls.getMethods();
             for (Method method : methods) {
 
-                Log.log("获取类声明的公开方法:" + method.getName()
+                CLog.log("获取类声明的公开方法:" + method.getName()
                         + "--方法修饰符:" + Modifier.toString(method.getModifiers())
                         + "--方法的返回值:" + method.getReturnType().getName()
                         + "--方法的参数:");
 
                 for (Class type : method.getParameterTypes()) {
-                    Log.log("---" + type.toString());
+                    CLog.log("---" + type.toString());
                 }
 
             }
@@ -199,15 +198,15 @@ class Main {
             //
             //反射调用对象的方法
             Person person = new Person(18, "学生");
-            Log.log("反射修改前:" + person);
+            CLog.log("反射修改前:" + person);
             Method method = person.getClass().getDeclaredMethod("setAge", int.class);
             if (!method.isAccessible())
                 method.setAccessible(true);
             method.invoke(person, 28);
-            Log.log("反射修改后:" + person);
+            CLog.log("反射修改后:" + person);
 
         } catch (Exception e) {
-            Log.log("异常:" + e.getMessage());
+            CLog.log("异常:" + e.getMessage());
         }
 
     }
@@ -226,15 +225,15 @@ class Main {
             Field field = tomTestType.getClass().getDeclaredField("data");
             //处理字段类型的泛型 使用TypeVariable
             Type type = field.getGenericType();
-            Log.log("泛型信息:" + type.getClass());
+            CLog.log("泛型信息:" + type.getClass());
 
             TypeVariable typeVariable = (TypeVariable) type;
-            Log.log("获取泛型名称:" + typeVariable.getName());
+            CLog.log("获取泛型名称:" + typeVariable.getName());
 
-            Log.log("泛型信息:" + typeVariable.getGenericDeclaration());
+            CLog.log("泛型信息:" + typeVariable.getGenericDeclaration());
 
             for (Type type1 : typeVariable.getBounds())
-                Log.log("获取泛型的上|下界信息:" + type1.toString());
+                CLog.log("获取泛型的上|下界信息:" + type1.toString());
 
         } catch (Exception e) {
         }

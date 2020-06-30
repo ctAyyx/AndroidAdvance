@@ -1,16 +1,13 @@
 package ct.com.basics.reflect;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import ct.com.basics.Log;
-import ct.com.basics.genericity.vo.Apple;
+import ct.com.basics.CLog;
 import ct.com.basics.reflect.vo.JsonBean;
 import ct.com.basics.reflect.vo.MyTypeToken;
-import ct.com.basics.reflect.vo.Person;
 import ct.com.basics.reflect.vo.Response;
 import ct.com.basics.reflect.vo.TestType;
 
@@ -42,10 +39,10 @@ class Main2 {
         TestType testType = new TestType<String>() {
         };
 
-        Log.log(testType.getClass().getGenericSuperclass().toString());
+        CLog.log(testType.getClass().getGenericSuperclass().toString());
         ParameterizedType parameterizedType = (ParameterizedType) testType.getClass().getGenericSuperclass();
 
-        Log.log("泛型的类型:" + parameterizedType.getActualTypeArguments()[0].toString());
+        CLog.log("泛型的类型:" + parameterizedType.getActualTypeArguments()[0].toString());
         Type type = parameterizedType.getActualTypeArguments()[0];
     }
 
@@ -63,35 +60,35 @@ class Main2 {
         response.data = jsonBean;
 
         String json = new Gson().toJson(response);
-        Log.log("服务端获取的Json数据:" + json);
+        CLog.log("服务端获取的Json数据:" + json);
 
 
         Type type = new MyTypeToken<Response<JsonBean>>() {
         }.getClass().getGenericSuperclass();
 
-        Log.log("获取到的泛型信息:" + type);
+        CLog.log("获取到的泛型信息:" + type);
         ParameterizedType parameterizedType = (ParameterizedType) type;
         //获取需要转换的实体数据
         Type relType = parameterizedType.getActualTypeArguments()[0];
-        Log.log("获取需要转换的实体数据:" + relType);
+        CLog.log("获取需要转换的实体数据:" + relType);
 
         try {
 
             ParameterizedType parameterizedType1 = (ParameterizedType) relType;
 
-            Log.log("声明的信息:" + (Class<?>) parameterizedType1.getRawType());
+            CLog.log("声明的信息:" + (Class<?>) parameterizedType1.getRawType());
             Class<?> cls = (Class<?>) parameterizedType1.getRawType();
             //获取Response的实体类
 
             Object o = cls.newInstance();
-            Log.log("获取的实体:" + o);
-            Log.log("response的泛型信息:" + parameterizedType1.getActualTypeArguments()[0]);
+            CLog.log("获取的实体:" + o);
+            CLog.log("response的泛型信息:" + parameterizedType1.getActualTypeArguments()[0]);
 
 
             //获取JsonBean的实体类
             Class<?> cls2 = (Class<?>) parameterizedType1.getActualTypeArguments()[0];
             Object o2 = cls2.newInstance();
-            Log.log("获取的实体:" + o2);
+            CLog.log("获取的实体:" + o2);
 
 
         } catch (Exception e) {

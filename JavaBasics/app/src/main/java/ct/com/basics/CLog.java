@@ -5,7 +5,7 @@ package ct.com.basics;
  * AUTHOR : CT
  * DESC :
  */
-public class Log {
+public class CLog {
 
     public static void log(String msg) {
         System.out.println(msg);
