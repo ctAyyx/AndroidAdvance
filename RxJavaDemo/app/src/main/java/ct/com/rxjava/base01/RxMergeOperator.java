@@ -61,7 +61,7 @@ public class RxMergeOperator {
 
 
         //startWith | startWithArray 操作符
-        //startWithArrayOperator();
+        startWithArrayOperator();
 
 
         //reduce 操作符
@@ -325,6 +325,7 @@ public class RxMergeOperator {
     private static void startWithArrayOperator() {
 
         Observable.just("A", "B", "C")
+
                 .startWithArray("D", "E", "F")
                 .startWith(Observable.fromArray("1", "2", "3"))
                 .subscribe(createObserver());

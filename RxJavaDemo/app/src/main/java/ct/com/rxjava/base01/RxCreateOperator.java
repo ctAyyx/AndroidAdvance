@@ -17,6 +17,19 @@ import io.reactivex.rxjava3.functions.Supplier;
  * TIME : 2020/6/27 0027
  * AUTHOR : CT
  * DESC : RxJava 创建操作符
+ * 一.复杂数据遍历
+ * just
+ * fromArray
+ * fromIterable
+ * Range
+ * 二.定时任务
+ * interval
+ * intervalRange
+ * 三.嵌套回调异步事件
+ * create
+ * 四.延迟任务
+ * defer
+ * timer
  */
 public class RxCreateOperator {
 
@@ -37,7 +50,7 @@ public class RxCreateOperator {
         //rangeOperator();
 
         //interval操作符
-        intervalOperator();
+        //intervalOperator();
 
         //intervalRange操作符
         //intervalRangeOperator();
@@ -46,7 +59,7 @@ public class RxCreateOperator {
         //deferOperator();
 
         //timer 操作符
-        //timerOperator();
+        timerOperator();
     }
 
 
