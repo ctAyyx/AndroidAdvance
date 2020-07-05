@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidUI</string>
+
+    <string name="btn_course01">第一节:什么是高级UI</string>
+</resources>
