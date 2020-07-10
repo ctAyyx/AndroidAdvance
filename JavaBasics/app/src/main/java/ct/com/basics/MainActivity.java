@@ -6,8 +6,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import ct.com.basics.reflect.job.ReflectJobActivity2;
-import ct.com.basics.reflect.job.ReflectJobActivity3;
+
 
 /**
  * TIME : 2020/6/20 0020
@@ -30,17 +29,13 @@ public class MainActivity extends AppCompatActivity {
                 readyGoReflectJobActivity();
                 break;
             case R.id.btn_reflect3:
-                startActivity(new Intent(this, ReflectJobActivity3.class));
+
                 break;
         }
     }
 
     private void readyGoReflectJobActivity() {
 
-        Intent intent = new Intent(this, ReflectJobActivity2.class);
-        intent.putExtra("name", "张三");
-        intent.putExtra("address", "三和小区");
-        intent.putExtra("arr1", new String[]{"1", "2"});
-        startActivity(intent);
+
     }
 }
