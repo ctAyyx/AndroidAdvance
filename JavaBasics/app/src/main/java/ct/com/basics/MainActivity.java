@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_main);
 
-
+ThreadLocal
     }
 
     public void onClick(View view) {
