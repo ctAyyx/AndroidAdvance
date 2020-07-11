@@ -2,4 +2,8 @@
     <string name="app_name">AndroidUI</string>
 
     <string name="btn_course01">第一节:什么是高级UI</string>
+    <string name="btn_course02">第二节:XML布局原理和插件换肤</string>
+
+
+    <string name="skin_title">本地包资源</string>
 </resources>

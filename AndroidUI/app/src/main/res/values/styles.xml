@@ -7,4 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Test" parent="AppTheme">
+        <item name="colorAccent">#FF00FF</item>
+    </style>
 </resources>
