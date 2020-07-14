@@ -1,30 +1,27 @@
-package ct.com.ui
+package ct.com.ui.course04
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import ct.com.ui.course01.Course01Activity
-import ct.com.ui.course02.SkinActivity
-import ct.com.ui.course04.Course04Activity
+import ct.com.ui.R
+import ct.com.ui.course04.demo01.LvAndVpActivity
+import ct.com.ui.course04.demo02.VpAndSwipeActivity
 import kotlin.reflect.KClass
 
-class MainActivity : AppCompatActivity() {
+class Course04Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_course04)
     }
 
     fun onClick(view: View) {
-
         when (view.id) {
-            R.id.btn_course01 -> readyGo(Course01Activity::class)
-            R.id.btn_course02 -> readyGo(SkinActivity::class)
-            R.id.btn_course04 -> readyGo(Course04Activity::class)
+            R.id.btn_course04_01 -> readyGo(LvAndVpActivity::class)
+            R.id.btn_course04_02 -> readyGo(VpAndSwipeActivity::class)
         }
 
     }
-
 
     private fun readyGo(cls: KClass<*>) {
         startActivity(Intent(this, cls.java))
