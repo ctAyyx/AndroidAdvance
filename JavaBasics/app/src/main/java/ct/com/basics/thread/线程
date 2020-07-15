@@ -68,6 +68,27 @@
       针对IO密集型:主要是网络访问和文件读取 最大线程数 = 可用处理器数量*2
       混合型:有CPU密集运算又有IO,如果两个执行时间差不多 就可以拆分为两个线程池
 
+四:面试题(这里没有写答案)
+   1.synchronized修饰普通方法和静态方法的区别?什么是可见性?
+   2.锁分哪几类?
+   3.CAS无锁编程的原理.
+   4.ReentrantLock的实现原理.
+   5.AQS原理(小米 京东)
+   6.Synchronized的原理以及与ReentrantLock的区别.(360)
+   7.Synchronized做了哪些优化(京东)
+   8.Synchronized static与非static锁的区别和范围(小米)
+   9.volatile 能否保证线程安全?在DCL上的作用是什么?
+   10.volatile和synchronize有什么区别?(B站 小米 京东)
+   11.什么是守护线程?你是如何退出一个线程的?
+   12.sleep,wait,yield 的区别,wait的线程如何唤醒它?(东方头条)
+   13.sleep是可中断的么?(小米)
+   14.线程生命周期.
+   15.ThreadLocal是什么?
+   16.线程池基本原理.
+   17.有三个线程T1,T2,T3,怎么确保它们按顺序执行?
+
+
+
 
 
 
