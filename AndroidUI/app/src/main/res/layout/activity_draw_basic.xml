@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".course05.basics.DrawBasicActivity">
+
+    <!--  Canvas 和 Paint的常用方法  -->
+    <ct.com.ui.course05.basics.CanvasBasicView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <!--  Paint使用详解  -->
+    <ct.com.ui.course05.basics.PaintView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
+
+    <!-- Canvas对文字的绘制   -->
+
+    <ct.com.ui.course05.basics.DrawTextView
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent" />
+
+    <!--  Canvas裁剪和几何变换  -->
+    <ct.com.ui.course05.basics.ClipView
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

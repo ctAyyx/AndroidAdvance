@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ct.com.ui">
+    package="com.ct.arithmetic">
 
     <application
         android:allowBackup="true"
@@ -9,13 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".course05.Course05Activity"></activity>
-        <activity android:name=".course05.basics.DrawBasicActivity" />
-        <activity android:name=".course04.demo01.LvAndVpActivity" />
-        <activity android:name=".course04.Course04Activity" />
-        <activity android:name=".course04.demo02.VpAndSwipeActivity" />
-        <activity android:name=".course02.SkinActivity" />
-        <activity android:name=".course01.Course01Activity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
