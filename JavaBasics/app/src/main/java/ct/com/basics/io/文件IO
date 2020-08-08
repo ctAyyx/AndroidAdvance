@@ -1,0 +1,30 @@
+文件IO(采用装饰者设计模式)
+
+ * 位   bit(比特)位是计算机内部数据储存的最小单位0 1
+ * 字节 byte(拜特) 字节是计算机中数据处理的基本单位。计算机中以字节为单位存储和解释信息，规定一个字节由八个二进制位构成，即1个字节等于8个比特（1Byte=8bit）
+ * <p>
+ * Java中8大基础类型
+ * byte     1个字节
+ * short    2个字节
+ * int      4个字节
+ * long     8个字节
+ * float    4个字节
+ * double   8个字节
+ * boolean  至少一个字节,JVM规范中,boolean当作int处理 4个字节 而boolean类型的数组作为byte数组处理 既数组中每个元素占1个字节
+ * char     2个字节
+ * 通常1个字节可以存入一个ASCII码，2个字节可以存放一个汉字国标码。
+一.字节流(InputStream OutputStream)
+
+                   |----ByteArrayOutputStream
+                   |
+                   |----
+                   |                                 |--BufferedOutputStream
+OutputStream <-----|----FilterOutputStream(装饰器)<--|
+                   |                                 |--DataOutputStream
+                   |                                 |--..........
+                   |----FileOutputStream
+                   |
+                   |----ObjectOutputStream
+
+二.字符流(Reader Writer)
+三.RandomAccessFile 随机访问文件的任何位置

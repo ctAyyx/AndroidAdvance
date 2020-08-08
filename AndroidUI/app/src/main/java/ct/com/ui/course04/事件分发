@@ -1,0 +1,14 @@
+Android事件分发机制和事件冲突
+
+一.事件的传递
+   Activity(dispatchTouchEvent) ---> PhoneWindow(superDispatchTouchEvent)
+   --->DecorView(superDispatchTouchEvent) 在这里调用super.dispatchTouchEvent(event),应为DecorView的父类FrameLayout没有实现dispatchTouchEvent --> ViewGroup(dispatchTouchEvent)-->View
+
+二.事件的消费
+   View不具有事件分发的能力,只有事件消费的能力
+   ViewGroup主要实现事件的分发.
+
+   1.View消费事件流程
+
+三.事件冲突解决方法
+   1.控件内

@@ -31,12 +31,14 @@ class Main {
         // getConstructorAndBuild();
         //getField();
         //getMethod();
-        //getTypeVariable();
-        //getParameterizedType();
-        //getGenericArrayType();
-        // getWildcardType();
 
-        getGenericType();
+        //针对泛型的反射
+        //getTypeVariable();
+        getParameterizedType();
+        //getGenericArrayType();
+        //getWildcardType();
+
+        //getGenericType();
     }
 
 
@@ -211,19 +213,26 @@ class Main {
 
     }
 
+    //============================针对泛型的反射=====================================
 
     /**
-     * 获取类中泛型参数的信息信息
+     * 获取类中声明的泛型参数的信息
      * <p>
      * 泛型直接作为字段存在
+     * <p>
+     * TypeVariable：声明在class中 泛型变量
+     * signature TM;
+     * T+泛型占位符
+     * T表示是泛型
      */
     private static void getTypeVariable() {
 
         try {
-            TestType tomTestType = new TestType<Tom>();
+            TestType<Tom> tomTestType = new TestType<>();
 
             Field field = tomTestType.getClass().getDeclaredField("data");
             //处理字段类型的泛型 使用TypeVariable
+            //获取字段的描述信息 也就是类型信息
             Type type = field.getGenericType();
             CLog.log("泛型信息:" + type.getClass());
 
@@ -233,9 +242,10 @@ class Main {
             CLog.log("泛型信息:" + typeVariable.getGenericDeclaration());
 
             for (Type type1 : typeVariable.getBounds())
-                CLog.log("获取泛型的上|下界信息:" + type1.toString());
+                CLog.log("获取泛型声明出的上|下界信息:" + type1.toString());
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -244,21 +254,36 @@ class Main {
      * 获取类中泛型参数的信息
      * <p>
      * 泛型作为一个字段的类型参数
+     * <p>
+     * ParameterizedType：泛型实例化参数信息
+     * signature Ljava/util/Map<Ljava/lang/String;Lct/com/basics/reflect/vo/Tom;>;
+     * L+引用类型
+     * L表示是引用类型
      */
     private static void getParameterizedType() {
         try {
 
             TestType<Tom> type = new TestType<>();
+            Class cls = type.getClass();
+            CLog.log(cls + "----" + cls.getGenericSuperclass());
+
             Field field = type.getClass().getDeclaredField("map");
+            Field field2 = type.getClass().getDeclaredField("data");
+            CLog.log(field2.getGenericType() + "字段的泛型信息:" + field.getGenericType());
+            //强转成参数化的泛型对象
             ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
 
             //获取指定字段声明的所有泛型
             Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
 
             System.out.println("==" + parameterizedType.getOwnerType());
-            System.out.println("获取该泛型的对象声明:" + parameterizedType.getRawType());
+            System.out.println("获取引用类型Type:" + parameterizedType.getRawType());
             for (Type type1 : actualTypeArguments) {
-                System.out.println("获取自定字段的泛型信息:" + type1.toString());
+                System.out.println("获取引用类型Type:" + type1.toString());
+                if (type1 instanceof ParameterizedType) {
+                    ParameterizedType parameterizedType1 = (ParameterizedType) type1;
+                    System.out.println("==" + parameterizedType1.getOwnerType());
+                }
             }
 
         } catch (Exception e) {
@@ -271,6 +296,11 @@ class Main {
      * 获取类中数组泛型信息
      * <p>
      * 泛型作为一个数组的类型参数
+     * <p>
+     * GenericArrayType:数组类型泛型信息
+     * signature [TM;
+     * [+数组类型
+     * [ 表示是数组类型 T表示泛型M
      */
     private static void getGenericArrayType() {
 
@@ -283,7 +313,7 @@ class Main {
             //处理数组泛型信息 使用 GenericArrayType
             GenericArrayType genericArrayType = (GenericArrayType) field.getGenericType();
 
-            System.out.println("获取数组泛型信息：" + genericArrayType.getGenericComponentType());
+            System.out.println("获取数组声明的Type：" + genericArrayType.getGenericComponentType());
 
 
         } catch (Exception e) {
@@ -293,6 +323,11 @@ class Main {
 
     /**
      * 获取通配符信息
+     * <p>
+     * WildcardType:通配符泛型信息
+     * // signature Lct/com/basics/reflect/vo/TestType<+Lct/com/basics/reflect/vo/Person;>;
+     * +表示上界
+     * -表示下界
      */
     private static void getWildcardType() {
         try {
@@ -328,12 +363,12 @@ class Main {
         }
     }
 
-    private static void getGenericType() {
-
-        //TestType<Tom> testType  = new TestType<>();
-ParameterizedType type1 = (ParameterizedType) new TestType<String>().getClass().getGenericSuperclass();
-        ParameterizedType type= (ParameterizedType) (new ArrayList<String>()).getClass().getGenericSuperclass();
-System.out.println(type);
-    }
+//    private static void getGenericType() {
+//
+//        //TestType<Tom> testType  = new TestType<>();
+//ParameterizedType type1 = (ParameterizedType) new TestType<String>().getClass().getGenericSuperclass();
+//        ParameterizedType type= (ParameterizedType) (new ArrayList<String>()).getClass().getGenericSuperclass();
+//System.out.println(type);
+//    }
 
 }

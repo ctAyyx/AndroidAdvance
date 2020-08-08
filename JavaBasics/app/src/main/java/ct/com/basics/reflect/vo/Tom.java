@@ -35,4 +35,9 @@ public class Tom extends Person {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+
+   static class TomA{
+
+    }
 }

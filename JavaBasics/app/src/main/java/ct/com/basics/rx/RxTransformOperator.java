@@ -26,10 +26,10 @@ public class RxTransformOperator {
         //mapOperator();
 
         //flatMap 操作符
-        //flatMapOperator();
+        flatMapOperator();
 
         //concatMap 操作符
-        concatMapOperator();
+        //concatMapOperator();
     }
 
 
