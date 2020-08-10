@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".course15.Course15Activity"></activity>
+        <activity android:name=".course12.Course12Activity"></activity>
+        <activity android:name=".course15.Course15Activity" />
         <activity android:name=".course05.Course05Activity" />
         <activity android:name=".course05.basics.DrawBasicActivity" />
         <activity android:name=".course04.demo01.LvAndVpActivity" />
