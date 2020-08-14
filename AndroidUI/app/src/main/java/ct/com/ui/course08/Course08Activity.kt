@@ -10,6 +10,6 @@ class Course08Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course08)
 
-        img_course08_fish.setImageDrawable(FishDrawable02())
+
     }
 }
