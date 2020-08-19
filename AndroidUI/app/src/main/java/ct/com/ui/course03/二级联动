@@ -1,0 +1,6 @@
+实现仿淘宝首页二级联动
+一.对嵌套滑动分析
+  1. NestedScrollingParent NestedScrollingParent2 NestedScrollingParent3
+  2.
+二.1.滑动事件冲突
+
