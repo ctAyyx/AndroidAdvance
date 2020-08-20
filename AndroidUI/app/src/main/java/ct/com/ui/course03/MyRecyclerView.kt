@@ -33,6 +33,7 @@ class MyRecyclerView @JvmOverloads constructor(
         offsetInWindow: IntArray?,
         type: Int
     ): Boolean {
+        Log.e("MyRecyclerView", "dispatchNestedPreScroll:dx:$dx -- dy:$dy -- type:$type")
         return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow, type)
     }
 
@@ -42,7 +43,46 @@ class MyRecyclerView @JvmOverloads constructor(
         consumed: IntArray?,
         offsetInWindow: IntArray?
     ): Boolean {
+        Log.e("MyRecyclerView", "dispatchNestedPreScroll:dx:$dx -- dy:$dy ")
         return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
     }
+
+    //==============分发滚动事件 MOVE事件===================
+
+    override fun dispatchNestedScroll(
+        dxConsumed: Int,
+        dyConsumed: Int,
+        dxUnconsumed: Int,
+        dyUnconsumed: Int,
+        offsetInWindow: IntArray?,
+        type: Int
+    ): Boolean {
+        Log.e("MyRecyclerView", "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed ")
+        return super.dispatchNestedScroll(
+            dxConsumed,
+            dyConsumed,
+            dxUnconsumed,
+            dyUnconsumed,
+            offsetInWindow,
+            type
+        )
+    }
+
+    override fun dispatchNestedScroll(
+        dxConsumed: Int,
+        dyConsumed: Int,
+        dxUnconsumed: Int,
+        dyUnconsumed: Int,
+        offsetInWindow: IntArray?
+    ): Boolean {
+        return super.dispatchNestedScroll(
+            dxConsumed,
+            dyConsumed,
+            dxUnconsumed,
+            dyUnconsumed,
+            offsetInWindow
+        )
+    }
+
 
 }

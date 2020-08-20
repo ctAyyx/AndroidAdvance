@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.NestedScrollingParent3
 import androidx.core.widget.NestedScrollView
-import androidx.recyclerview.widget.RecyclerView
 
 class MyNestedScrollView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -69,7 +68,7 @@ class MyNestedScrollView @JvmOverloads constructor(
         super.onNestedScrollAccepted(child, target, nestedScrollAxes)
     }
 
-    //=============================
+    //=============================当嵌套滚动开始前 MOVE事件=============================
 
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray) {
         super.onNestedPreScroll(target, dx, dy, consumed)
@@ -78,6 +77,10 @@ class MyNestedScrollView @JvmOverloads constructor(
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
         super.onNestedPreScroll(target, dx, dy, consumed, type)
     }
+
+    //===========================当开始嵌套滚动 MOVE事件=================================
+
+
 
 
 }
