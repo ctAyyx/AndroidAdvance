@@ -3,6 +3,7 @@
 
     <string name="btn_course01">第一节:什么是高级UI</string>
     <string name="btn_course02">第二节:XML布局原理和插件换肤</string>
+    <string name="btn_course03">第三节:仿淘宝首页二级联动</string>
 
     <string name="btn_course04">第四节:事件分发机制和冲突解决</string>
     <string name="btn_course04_01">ListView和ViewPager冲突解决</string>

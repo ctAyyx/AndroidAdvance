@@ -1,5 +1,7 @@
 package ct.com.ui.course08
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.*
@@ -51,7 +53,7 @@ class MyFragmeLayout @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
+        //canvas.drawPath(mPath,mPaint)
         invalidate()
     }
 
@@ -101,17 +103,19 @@ class MyFragmeLayout @JvmOverloads constructor(
             mFishCenterPoint.y - mFishRelativeCenterPoint.y
         )
         mPath.cubicTo(
-            mFishHeadPoint.x,
-            mFishHeadPoint.y,
-            secondPoint.x,
-            secondPoint.y,
+            mFishHeadPoint.x - mFishRelativeCenterPoint.x,
+            mFishHeadPoint.y - mFishRelativeCenterPoint.y,
+            secondPoint.x - mFishRelativeCenterPoint.x,
+            secondPoint.y - mFishRelativeCenterPoint.y,
             downX - mFishRelativeCenterPoint.x,
             downY - mFishRelativeCenterPoint.y
         )
+
+
         //通过动画来改变鱼的坐标
         val animator = ObjectAnimator.ofFloat(imgFish, "x", "y", mPath)
-        animator.duration = 4000L
-        animator.start()
+        animator.duration = 2500L
+
 
         val pathMeasure = PathMeasure(mPath, false)
         val tan = FloatArray(2)
@@ -123,6 +127,18 @@ class MyFragmeLayout @JvmOverloads constructor(
             fishDrawable.fishMainAngle = angle
         }
 
+        animator.addListener(object : AnimatorListenerAdapter() {
+
+            override fun onAnimationStart(animation: Animator?) {
+                fishDrawable.rate = 2.8f
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                fishDrawable.rate = 1.0f
+            }
+        })
+
+        animator.start()
     }
 
 
@@ -151,7 +167,6 @@ class MyFragmeLayout @JvmOverloads constructor(
 
         //获取AOB角度 0~180
         val angleAOB = Math.toDegrees(acos(cosAOB.toDouble()))
-        Log.e("TAG", "$angleAOB----${acos(cosAOB.toDouble())}")
 
         //计算 AB OB的tan值
         val tanAB = (pointA.y - pointB.y) / (pointA.x - pointB.x)

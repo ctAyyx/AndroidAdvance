@@ -28,10 +28,10 @@ class FishDrawable02 : Drawable() {
     }
 
     //鱼起始角度
-     var fishMainAngle = 90.0
+    var fishMainAngle = 90.0
 
     //鱼头部大小
-     val HEAD_RADIUS = 60f
+    val HEAD_RADIUS = 25f
 
     //鱼身的长度
     private val BODY_LENGTH = HEAD_RADIUS * 3.2f
@@ -73,18 +73,20 @@ class FishDrawable02 : Drawable() {
 
     private var offsetValue = 0.0
 
+    var rate = 1.0f
+
     init {
         startAnim()
     }
 
 
-     lateinit var headPoint: PointF
+    lateinit var headPoint: PointF
 
 
     override fun draw(canvas: Canvas) {
 
         //鱼主要朝向
-        val fishAngle = fishMainAngle + sin(Math.toRadians(1.2*offsetValue)) * 10f
+        val fishAngle = fishMainAngle + sin(Math.toRadians(1.2 * offsetValue)) * 10f
 
         //获取鱼头的圆心坐标
         headPoint = calculatePoint(middlePoint, BODY_LENGTH / 2, fishAngle)
@@ -93,6 +95,7 @@ class FishDrawable02 : Drawable() {
 
         //获取 鱼鳍起始点的坐标
         //右鱼鳍起始点坐标
+
         val rightFinsStartPoint = calculatePoint(headPoint, FINS_START_LENGTH, fishAngle - 110.0)
         drawFins(canvas, rightFinsStartPoint, fishAngle, true)
 
@@ -105,7 +108,7 @@ class FishDrawable02 : Drawable() {
         val bodyBottomCenterPoint = calculatePoint(headPoint, BODY_LENGTH, fishAngle - 180)
 
 
-        var offsetFishAngle = fishAngle + cos(Math.toRadians(1.5 * offsetValue)) * 15f
+        var offsetFishAngle = fishAngle + cos(Math.toRadians(1.5 * offsetValue * rate)) * 15f
         //获取鱼尾第二个圆的圆心
         val middlePoint =
             calculatePoint(bodyBottomCenterPoint, FISHTAIL_BIG_LENGTH, offsetFishAngle - 180)
@@ -123,7 +126,7 @@ class FishDrawable02 : Drawable() {
             true
         )
 
-        offsetFishAngle = fishAngle + sin(Math.toRadians(1.5 * offsetFishAngle)) * 30f
+        offsetFishAngle = fishAngle + sin(Math.toRadians(1.5 * offsetValue * rate)) * 30f
         //获取鱼尾底部圆的圆心
         val smallPoint = calculatePoint(middlePoint, FISHTAIL_SMALL_LENGTH, offsetFishAngle - 180)
         //绘制第二个节肢
@@ -292,12 +295,12 @@ class FishDrawable02 : Drawable() {
         fishAngle: Double,
         isDrawRight: Boolean = true
     ) {
-
+        val finsAngle =115f+ sin(Math.toRadians(1.1*offsetValue*rate))*10f
         //获取鱼鳍 结束点的坐标
         val endPoint = calculatePoint(startPoint, FINS_LENGTH, fishAngle - 180)
 
         //获取控制点的坐标
-        val controlAngle = if (isDrawRight) fishAngle - 115f else fishAngle + 115f
+        val controlAngle = if (isDrawRight) fishAngle - finsAngle else fishAngle + finsAngle
         val controlPoint = calculatePoint(startPoint, FINS_LENGTH * 1.8f, controlAngle)
 
         //绘制
@@ -316,7 +319,7 @@ class FishDrawable02 : Drawable() {
      *
      *
      * */
-     fun calculatePoint(startPointF: PointF, length: Float, angle: Double): PointF {
+    fun calculatePoint(startPointF: PointF, length: Float, angle: Double): PointF {
 
         // X 坐标
         val deltaX = (cos(Math.toRadians(angle)) * length).toFloat()
