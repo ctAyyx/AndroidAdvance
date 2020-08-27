@@ -6,9 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".course03.Course03Activity">
 
-    <androidx.core.widget.NestedScrollView
+    <ct.com.ui.course03.MyNestedScrollView
+        android:id="@+id/nested_course03"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <ct.com.ui.course03.MyRecyclerView
+                android:id="@+id/rv_course03"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+    </ct.com.ui.course03.MyNestedScrollView>
 
 
 </LinearLayout>

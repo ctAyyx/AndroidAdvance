@@ -1,0 +1,31 @@
+一.RecyclerView的缓存 复用机制(缓存复用ViewHolder)
+  1.RecyclerView的复用机制
+   a.由onTouchEvent事件进入: 在MOVE事件中-->scrollByInternal()-->scrollStep()-->mLayout.scrollVerticallyBy/scrollHorizontallyBy(这里就直接讨论垂直滚动,LinearLayoutManager)
+                                       -->scrollBy()
+                                       -->fill(这个方法是复用的主要方法)-->layoutChunk(循环调用)-->layoutState.next(获取ItemView)--> addView(view);
+                           获取缓存的ViewHolder然后获取ItemView
+                           layoutState.next()-->recycler.getViewForPosition()-->tryGetViewHolderForPositionByDeadline(position, dryRun, FOREVER_NS).itemView;
+                           获取缓存的ViewHolder
+                           tryGetViewHolderForPositionByDeadline(position, dryRun, FOREVER_NS)
+                             通过getChangedScrapViewForPosition(与动画相关),获取 mChangedScrap(当前屏幕的预布局) 中获取缓存的ViewHolder
+                             通过getScrapOrHiddenOrCachedHolderForPosition(通过位置),获取  mAttachedScrap  mCachedViews  中获取缓存的ViewHolder
+                             通过getScrapOrCachedViewForId(通过itemID viewType),获取  mAttachedScrap  mCachedViews  中获取缓存的ViewHolder
+                             通过mViewCacheExtension.getViewForPositionAndType(用户自定义的缓存机制 一般用不到)
+                             通过getRecycledViewPool().getRecycledView(type),获取 mRecyclerPool(类似于HashMap的数据结构 viewType为Key 相同Type的使用集合保存 最多一个type有5个数据) 中获取缓存的ViewHolder
+                             如果上面的缓存机制都没有获取到ViewHolder,mAdapter.createViewHolder(RecyclerView.this, type)-->onCreateViewHolder(parent, viewType);
+                             绑定ViewHolder通过tryBindViewHolderByDeadline--> mAdapter.bindViewHolder(holder, offsetPosition) -->onBindViewHolder(holder, position, holder.getUnmodifiedPayloads());
+
+  2.RecyclerView的缓存机制
+   a.由onLayoutChildren方法进入:detachAndScrapAttachedViews-->scrapOrRecycleView
+     1).recycler.recycleViewHolderInternal(viewHolder)
+        如果ViewHolder是没有改变的(比如更新视图数据 移除等),判断cachedViewSize的大小,如果>=mViewCacheMax(默认为2),调用recycleCachedViewAt(0)-->addViewHolderToRecycledViewPool并从mCachedViews中移除当前ViewHolder
+        则会执行mCachedViews缓存ViewHolder.
+        如果ViewHolder是改变了的,直接调用addViewHolderToRecycledViewPool-->getRecycledViewPool().putRecycledView(holder)
+
+     2).recycler.scrapView(view)
+        如果ViewHolder没有改变的话, mAttachedScrap.add(holder);
+        否则 mChangedScrap.add(holder);
+
+  3.RecyclerView在onLayout(复用ViewHolder)-->dispatchLayout()--> mLayout.onLayoutChildren(mRecycler, mState);-->fill()
+  4.fill方法中缓存ViewHolder:fill()-->recycleByLayoutState()-->recycleViewsFromStart/recycleViewsFromEnd-->recycleChildren()-->removeAndRecycleViewAt()-->recycler.recycleView(view)-->recycleViewHolderInternal()
+    在fill方法中缓存的ViewHolder只会缓存的mCacheViews和RecycledViewPool中

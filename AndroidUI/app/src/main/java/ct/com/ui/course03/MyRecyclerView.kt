@@ -75,6 +75,7 @@ class MyRecyclerView @JvmOverloads constructor(
         dyUnconsumed: Int,
         offsetInWindow: IntArray?
     ): Boolean {
+        //Log.e("MyRecyclerView", "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed ")
         return super.dispatchNestedScroll(
             dxConsumed,
             dyConsumed,
@@ -82,6 +83,16 @@ class MyRecyclerView @JvmOverloads constructor(
             dyUnconsumed,
             offsetInWindow
         )
+    }
+
+
+    //=====================停止嵌套滚动 ================
+    override fun stopNestedScroll(type: Int) {
+        Log.e("MyRecyclerView", "stopNestedScroll:type:$type ")
+        super.stopNestedScroll(type)
+    }
+    override fun stopNestedScroll() {
+        super.stopNestedScroll()
     }
 
 
