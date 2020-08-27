@@ -1,0 +1,15 @@
+一.Handler源码分析.
+   1.Handler(负责发送和处理消息)
+   2.Looper (循环取出消息)
+   3.MessageQueue (存放消息)
+   4.Message (消息)
+
+二.Message复用(享元设计模式)
+   Message采用链表结构.recycleUnchecked() obtain()
+
+三.MessageQueue 放入(enqueueMessage) 和 取出(next) 消息都采用了锁
+
+四.同步屏障.
+   在MessageQueue的next方法中 如果获取到的Message的target为null的话,表示当前Message为同步屏障,开始遍历队列获取第一个异步消息并处理
+
+五.HandlerThread IntentService

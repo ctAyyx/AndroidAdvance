@@ -3,6 +3,8 @@ package ct.com.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
 import android.view.View
 import ct.com.ui.course01.Course01Activity
 import ct.com.ui.course02.SkinActivity
@@ -44,4 +46,5 @@ class MainActivity : AppCompatActivity() {
     private fun readyGo(cls: KClass<*>) {
         startActivity(Intent(this, cls.java))
     }
+
 }
