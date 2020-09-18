@@ -13,6 +13,7 @@ import ct.com.ui.course04.Course04Activity
 import ct.com.ui.course05.Course05Activity
 import ct.com.ui.course07.Course07Activity
 import ct.com.ui.course08.Course08Activity
+import ct.com.ui.course10.Course10Activity
 import ct.com.ui.course12.Course12Activity
 import ct.com.ui.course15.Course15Activity
 import kotlin.reflect.KClass
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_course05 -> readyGo(Course05Activity::class)
             R.id.btn_course07 -> readyGo(Course07Activity::class)
             R.id.btn_course08 -> readyGo(Course08Activity::class)
+            R.id.btn_course10 -> readyGo(Course10Activity::class)
             R.id.btn_course12 -> readyGo(Course12Activity::class)
             R.id.btn_course13 -> readyGo(Course05Activity::class)
             R.id.btn_course14 -> readyGo(Course05Activity::class)

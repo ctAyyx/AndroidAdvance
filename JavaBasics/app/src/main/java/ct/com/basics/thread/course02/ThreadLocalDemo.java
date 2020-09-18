@@ -7,7 +7,6 @@ import ct.com.basics.CLog;
  */
 public class ThreadLocalDemo {
 
-
     private static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
 
     public static void main(String[] args) {

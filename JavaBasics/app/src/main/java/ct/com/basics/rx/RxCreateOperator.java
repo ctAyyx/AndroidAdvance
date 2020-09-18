@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
@@ -12,6 +13,7 @@ import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Supplier;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * TIME : 2020/6/27 0027
@@ -85,6 +87,7 @@ public class RxCreateOperator {
         });
         name = "王二";
         observable.subscribe(createObserver());
+
     }
 
 
