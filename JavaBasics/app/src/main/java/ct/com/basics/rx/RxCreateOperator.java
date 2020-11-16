@@ -86,7 +86,8 @@ public class RxCreateOperator {
             }
         });
         name = "王二";
-        observable.subscribe(createObserver());
+        observable
+                .subscribe(createObserver());
 
     }
 

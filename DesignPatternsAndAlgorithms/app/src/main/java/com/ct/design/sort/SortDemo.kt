@@ -20,11 +20,13 @@ fun main() {
     //insertSort(ARRAY)
 
     //希尔排序
-    //shellSort(ARRAY)
+    shellSort(ARRAY)
 
     //归并排序
-    ARRAY = mergeSort(ARRAY)
+    //ARRAY = mergeSort(ARRAY)
 
+    //快速排序
+    quickSort(ARRAY, 0, ARRAY.size-1)
     println("排序后:${ARRAY.contentToString()}")
 
 
@@ -151,13 +153,41 @@ private fun merge(left: IntArray, right: IntArray): IntArray {
  * 2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。
  * 3．再对左右区间重复第二步，直到各区间只有一个数。
  * */
-private fun quickSort(array: IntArray, start: Int, end: Int): IntArray? {
-    if (array.isEmpty() || start < 0 || end >= array.size || start > end)
-        return null
+private fun quickSort(array: IntArray, start: Int, end: Int) {
+    if (start >= end)
+        return
 
+    var low = start
+    var high = end
+
+    val index = array[low]
+
+    while (low < high) {
+        while (index <= array[high] && low < high)
+            high--
+        if(low < high){
+            array[low] = array[high]
+            low++
+
+        }
+
+        while (index > array[low] && low < high)
+            low++
+
+        if(low < high){
+            array[high] = array[low]
+            high--
+        }
+
+    }
+
+    array[low] = index
+
+    quickSort(array, start, low-1)
+    quickSort(array, low+1, end)
 
 }
 
-private fun partition(array: IntArray, start: Int, end: Int): Int {
-
-}
+//private fun partition(array: IntArray, start: Int, end: Int): Int {
+//
+//}

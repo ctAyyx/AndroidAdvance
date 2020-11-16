@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ct.com.ui">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".course10.Course10Activity"></activity>
+        <activity android:name=".course12.cs.ConstraintActivity"></activity>
+        <activity android:name=".course10.Course10Activity" />
         <activity android:name=".course03.Course03Activity" />
         <activity android:name=".course08.Course08Activity" />
         <activity android:name=".course07.Course07Activity" />
