@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.toLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.bumptech.glide.Glide
 import com.ct.framework.R
 import com.ct.framework.jetpack.adapter.RvCategoryAdapter
 import com.ct.framework.jetpack.di.AppModule
@@ -25,6 +26,8 @@ import com.ct.framework.jetpack.room.AppDatabase
 import com.ct.framework.jetpack.room.dao.GirlDao
 import com.ct.framework.jetpack.room.dao.GirlDao_Impl
 import kotlinx.android.synthetic.main.activity_jetpack.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 
 /**
  * 针对 NetworkBoundResource 在引入Paging后无法适用的情况
@@ -54,7 +57,6 @@ class JetpackActivity02 : AppCompatActivity() {
             //loadData()
             loadData2()
         }
-
 
     }
 
@@ -86,8 +88,13 @@ class JetpackActivity02 : AppCompatActivity() {
         })
 
         resource.networkState?.observe(this, Observer {
-            Log.e("TAG", "数据请求状态:$it")
+            Log.e("TAG", "网络请求状态:$it")
         })
+
+        resource.refreshState?.observe(this, Observer {
+            Log.e("TAG", "数据刷新状态:$it")
+        })
+
     }
 
 }

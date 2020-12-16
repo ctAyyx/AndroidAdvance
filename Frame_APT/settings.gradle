@@ -1,0 +1,4 @@
+include ':apt-compiler'
+include ':apt-annotations'
+include ':app'
+rootProject.name = "Frame_APT"

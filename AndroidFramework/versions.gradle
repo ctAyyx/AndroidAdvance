@@ -29,11 +29,12 @@ versions.lifecycle = '2.2.0'
 //Room库
 versions.room = '2.2.5'
 //Work
-versions.work = '2.3.0'
+versions.work = '2.4.0'
 //设置库
 versions.preference = '1.1.0'
 //DI注入库
 versions.dagger = '2.27'
+versions.hilt = '2.28-alpha'
 
 //常用三方库
 versions.glide = '4.11.0'
@@ -142,7 +143,7 @@ room.test = "androidx.room:room-testing:$versions.room"//testImplementation
 
 //WorkManager
 def work = [:]
-work.runtime = "androidx.work:work-runtime-ktx:$versions.work"
+work.core = "androidx.work:work-runtime-ktx:$versions.work"
 
 //设置库
 def preference = [:]
@@ -172,6 +173,13 @@ dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger" //kapt an
 dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
 dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
 dagger.android_processor = "com.google.dagger:dagger-android-processor:$versions.dagger"//kapt annotationProcessor
+
+//Hilt
+def hilt = [:]
+hilt.core = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.kapt = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+hilt.plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+
 
 //Zxing
 def zxing = [:]
@@ -212,6 +220,7 @@ deps.retrofit = retrofit
 deps.rx2 = rx2
 deps.glide = glide
 deps.dagger = dagger
+deps.hilt = hilt
 deps.zxing = zxing
 deps.autosize = autosize
 deps.permission = permission

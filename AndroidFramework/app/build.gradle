@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -60,6 +61,7 @@ dependencies {
     //Room
     implementation deps.room.runtime
     kapt deps.room.compiler
+    implementation deps.room.extension
 
     //Paging
     implementation deps.paging.runtime_ktx
@@ -78,5 +80,19 @@ dependencies {
     //Androidx组件
     implementation deps.androidx.swipe
     implementation deps.androidx.recycler
+
+    //Hilt
+    implementation deps.hilt.core
+    kapt deps.hilt.kapt
+
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
+    // When using Kotlin.
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
+
+
+
+    //WorkManager
+    implementation deps.work.core
+
 
 }

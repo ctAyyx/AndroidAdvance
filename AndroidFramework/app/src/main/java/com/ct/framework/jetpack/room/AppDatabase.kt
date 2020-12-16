@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.ct.framework.jetpack.room.dao.GirlDao
 import com.ct.framework.jetpack.vo.GirlList
 
-@Database(entities = [GirlList::class], version = 1)
+@Database(entities = [GirlList::class], version = 1,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun girlDao(): GirlDao

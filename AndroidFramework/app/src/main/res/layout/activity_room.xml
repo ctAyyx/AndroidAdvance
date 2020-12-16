@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".room.RoomActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_room_01"
+        android:layout_width="match_parent"
+        android:text="添加数据"
+        android:onClick="onClick"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_room_02"
+        android:layout_width="match_parent"
+        android:text="获取简单数据"
+        android:onClick="onClick"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_room_03"
+        android:layout_width="match_parent"
+        android:text="获取一对一关系数据"
+        android:onClick="onClick"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_room_04"
+        android:layout_width="match_parent"
+        android:text="获取一对多关系数据"
+        android:onClick="onClick"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_room_05"
+        android:layout_width="match_parent"
+        android:text="获取多对多关系数据"
+        android:onClick="onClick"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_room_06"
+        android:layout_width="match_parent"
+        android:text="定义嵌套关系"
+        android:onClick="onClick"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
