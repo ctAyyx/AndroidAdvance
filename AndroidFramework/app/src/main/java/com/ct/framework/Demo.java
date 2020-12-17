@@ -783,6 +783,8 @@ public class Demo {
      * 广度遍历
      */
     public static void findBFS(TreeNode root, List<Integer> list) {
+        if (root == null)
+            return;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {

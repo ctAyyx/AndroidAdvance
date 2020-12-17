@@ -1,5 +1,6 @@
 package com.ct.framework.hilt
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -11,7 +12,9 @@ import com.ct.framework.hilt.point.UserManager
 import com.ct.framework.hilt.vm.GankViewModel
 import com.ct.framework.hilt.vo.Car
 import com.ct.framework.hilt.vo.User
+import com.ct.hiltlib.HiltLibActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_hilt.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -46,6 +49,7 @@ class HiltActivity : AppCompatActivity() {
 
     @Inject
     lateinit var userManager: UserManager
+
     @Inject
     lateinit var userManager2: UserManager
 
@@ -66,5 +70,9 @@ class HiltActivity : AppCompatActivity() {
         Log.e("TAG", "UserManager:$userManager2}")
 
         userManager.getMyCar()
+
+        btn_hilt_01.setOnClickListener {
+            startActivity(Intent(this, HiltLibActivity::class.java))
+        }
     }
 }
