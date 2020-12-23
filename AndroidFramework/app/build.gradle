@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -67,9 +68,6 @@ dependencies {
     //Paging
     implementation deps.paging.runtime_ktx
 
-    //Navigation
-    implementation deps.navigation.fragment_ktx
-
 
     //Retrofit
     implementation deps.retrofit.retrofit
@@ -85,15 +83,15 @@ dependencies {
     //Hilt
     implementation deps.hilt.core
     kapt deps.hilt.kapt
-
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
-    // When using Kotlin.
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
-
-
 
     //WorkManager
     implementation deps.work.core
+
+    //Navigation
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
 
 
 }

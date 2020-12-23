@@ -2350,4 +2350,10 @@ public class Demo {
 
     }
 
+    public int divide(int dividend, int divisor) {
+        int num = Math.abs(divisor);
+        int offset = (int) Math.ceil(Math.sqrt(num));
+
+        return divisor > 0 ? dividend >> offset : -(dividend >> offset);
+    }
 }

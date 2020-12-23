@@ -21,7 +21,7 @@ versions.startup = '1.0.0-alpha03'
 //DataStore
 versions.datastore = '1.0.0-alpha01'
 //导航栏
-versions.nav_version = '2.3.0'
+versions.nav_version = '2.3.2'
 //分页
 versions.paging = '2.1.1'
 //生命周期感知
@@ -89,14 +89,15 @@ datastore.preferences = "androidx.datastore:datastore-preferences:$versions.data
 def navigation = [:]
 navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.nav_version"
 navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.nav_version"
-navigation.fragment = "androidx.navigation:navigation-fragment:$versions.nav_version"
-navigation.ui = "androidx.navigation:navigation-ui:$versions.nav_version"
 //动态模块支持库
 navigation.dynamic = "androidx.navigation:navigation-dynamic-features-fragment:$versions.nav_version"
 //测试
 navigation.test = "androidx.navigation:navigation-testing:$versions.nav_version"
 //插件
 navigation.safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav_version"
+//Jetpack
+navigation.jetpack = "androidx.navigation:navigation-compose:1.0.0-alpha03"
+
 
 //Lifecycle
 def lifecycle = [:]

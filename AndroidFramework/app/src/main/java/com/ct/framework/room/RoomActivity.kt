@@ -64,8 +64,25 @@ class RoomActivity : AppCompatActivity() {
         val address1 = Address("中国", "成都")
         val address2 = Address("中国", "北京")
         val users = arrayOf(
-            RoomUser(name = "张三2", age = 10, address = address1),
-            RoomUser(name = "李四2", age = 15, address = address2)
+            RoomUser(
+                name = "张三2",
+                age = 10,
+                address = address1
+                ,
+                photos = mutableListOf("13540366155", "13540366156")
+                ,
+                photos2 = mutableListOf(123, 456)
+
+            ),
+            RoomUser(
+                name = "李四2",
+                age = 15,
+                address = address2
+                ,
+                photos = mutableListOf("18080947066", "18080947067")
+                ,
+                photos2 = mutableListOf(147, 258)
+            )
         )
         userDao.insertUser(*users)
 

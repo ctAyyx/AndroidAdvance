@@ -494,11 +494,108 @@ public class Offer {
     }
 
     /**
-     * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。
+     * 输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。
+     * 例如输入字符串"I am a student. "，则输出"student. a am I"。
      */
-//    public boolean verifyPostorder(int[] postorder) {
-//
-//    }
+    public String reverseWords(String s) {
+        if (s == null || "".equals(s))
+            return "";
 
+        int size = s.length();
+        int preIndex = size - 1;
+        StringBuilder builder = new StringBuilder();
+        for (int i = size - 1; i >= 0; i--) {
+            if (s.charAt(i) == ' ') {
+                if (preIndex == i) {
+                    preIndex--;
+                    continue;
+                }
+                if (builder.length() != 0)
+                    builder.append(' ');
+                builder.append(s.substring(i + 1, preIndex + 1));
+
+                preIndex = i;
+                preIndex--;
+            }
+
+        }
+
+        if (preIndex > 0) {
+            if (builder.length() != 0)
+                builder.append(' ');
+            builder.append(s.substring(0, preIndex + 1));
+        }
+
+        return builder.toString();
+    }
+
+    /**
+     * 字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。
+     * 比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+     */
+    public String reverseLeftWords(String s, int n) {
+        if (s == null || "".equals(s) || s.length() <= n || n == 0)
+            return s;
+        StringBuilder builder = new StringBuilder();
+        int size = s.length();
+        builder.append(s.substring(n, size));
+        builder.append(s.substring(0, n));
+
+        return builder.toString();
+
+
+    }
+
+    /**
+     * 给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+     */
+
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length == 0)
+            return nums;
+
+        int size = nums.length;
+        int n = size - k + 1;
+        int[] result = new int[n];
+        int preIndex = -1;
+
+        for (int i = 0; i < n; i++) {
+            int maxNum;
+            if (preIndex < i) {
+                maxNum = nums[i];
+                preIndex = i;
+                for (int j = i + 1; j < i + k; j++) {
+                    if (nums[j] >= maxNum) {
+                        maxNum = nums[j];
+                        preIndex = j;
+                    }
+                }
+            } else {
+                maxNum = nums[preIndex];
+                if (nums[i + k - 1] >= maxNum) {
+                    maxNum = nums[i + k - 1];
+                    preIndex = i + k - 1;
+                }
+            }
+
+
+            result[i] = maxNum;
+
+        }
+
+
+        return result;
+
+    }
+
+    /**
+     * 从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，
+     * 而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+     */
+    public boolean isStraight(int[] nums) {
+
+
+
+    }
 }
 

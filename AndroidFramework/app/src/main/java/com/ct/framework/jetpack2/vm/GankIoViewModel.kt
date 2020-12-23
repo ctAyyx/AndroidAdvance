@@ -1,6 +1,7 @@
 package com.ct.framework.jetpack2.vm
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ct.framework.jetpack2.repository.GankIoRepository
 
 /**
@@ -12,6 +13,10 @@ class GankIoViewModel(private val repository: GankIoRepository) : ViewModel() {
 
     fun getGirlDetailWithStatus(id: String) = repository.getDetailWithStatus(id = id)
 
+    fun getDetailWithCoroutines(id: String) = repository.getDetailWithCoroutines(id)
 
+    fun a(){
+        viewModelScope
+    }
 }
 

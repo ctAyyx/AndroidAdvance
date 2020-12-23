@@ -24,14 +24,17 @@ import kotlinx.coroutines.launch
  *
  * */
 class GankIoActivity : AppCompatActivity(), CoroutineScope by MainScope() {
-
-
-    private val db by lazy {
-        Room.databaseBuilder(this, GankDatabase::class.java, "GankIo2")
-
-            .build()
+    companion object {
+        var lau = "th"
     }
 
+//    private val db by lazy {
+//        Room.databaseBuilder(this, GankDatabase::class.java, "gank_th")
+//            .fallbackToDestructiveMigration()
+//            .build()
+//    }
+
+    private lateinit var db: GankDatabase
 
     /**
      * 这里应该使用DIO 注入
@@ -62,6 +65,22 @@ class GankIoActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             }
             R.id.btn_gankIo_02 -> {
                 getDetailWithStatus()
+            }
+            R.id.btn_gankIo_03 -> {
+                useRetrofitWith()
+            }
+
+            R.id.btn_gankIo_04 -> {
+                lau = "th"
+                db = Room.databaseBuilder(this, GankDatabase::class.java, "gank_${lau}")
+                    .fallbackToDestructiveMigration()
+                    .build()
+            }
+            R.id.btn_gankIo_05 -> {
+                lau = "zh"
+                db = Room.databaseBuilder(this, GankDatabase::class.java, "gank_${lau}")
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
         }
     }
@@ -108,6 +127,19 @@ class GankIoActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                 .getDetail02("5e777432b8ea09cade05263f")
 
             Log.e("TAG", "获取的数据:${Gson().toJson(model)}")
+        }
+    }
+
+
+    //================== 我们使用 Retrofit 的新特性 =================
+    // Retrofit 和 协程 的共同使用
+    private fun useRetrofitWith() {
+        val result = viewModel.getDetailWithCoroutines("5e777432b8ea09cade05263f")
+        result.data?.observe(this) {
+            Log.e("TAG", "通过协程获取数据:$it")
+        }
+        result.networkState?.observe(this) {
+            Log.e("TAG", "通过协程获取状态:$it")
         }
     }
 

@@ -28,4 +28,9 @@ class Test2VMFactory(private val repository: Test2Repository) : ViewModelProvide
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return Test2ViewModel(repository) as T
     }
+
+
+
+
+
 }

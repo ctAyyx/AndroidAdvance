@@ -13,7 +13,8 @@ data class RoomUser(
     val name: String,
     val age: Int,
     val sex: Boolean = false,
-
     @Embedded //创建嵌套对象
-    val address: Address?
+    val address: Address?,
+    val photos: List<String>,
+    val photos2: List<Int>
 )

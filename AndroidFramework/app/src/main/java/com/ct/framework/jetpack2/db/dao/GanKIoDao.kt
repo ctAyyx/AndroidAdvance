@@ -17,4 +17,10 @@ interface GanKIoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDetail(model: DetailVo)
 
+    @Query("SELECT * FROM detailVos WHERE id=:id")
+    suspend fun getDetailByIdWithCoroutines(id: String): DetailVo
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDetailWithCoroutines(model: DetailVo)
+
 }

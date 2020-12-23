@@ -89,4 +89,44 @@ class GankIoRepository(
 
     }
 
+    fun getDetailWithCoroutines(id: String): ResourceStatus<DetailVo> {
+        val request = object : NetworkStatusWithCoroutinesResource<DetailVo, Detail>() {
+            override suspend fun createCall(): BaseResponse<Detail> {
+                return serviceApi.getDetail02(id)
+            }
+
+            override fun processResponse(response: BaseResponse<Detail>): DetailVo {
+                return response.data.run {
+                    DetailVo(
+                        id = id,
+                        author = author,
+                        image = images[0],
+                        time = updatedAt,
+                        type = type
+                    )
+                }
+            }
+
+            override fun useDB() = true
+
+            override suspend fun loadFromDb(): DetailVo {
+                return dao.getDetailByIdWithCoroutines(id)
+            }
+
+            override fun shouldFetch(data: DetailVo?): Boolean {
+                return data == null || data.saveTime < 10L
+            }
+
+            override suspend fun saveCallResult(data: DetailVo) {
+                dao.insertDetailWithCoroutines(data)
+            }
+
+        }
+        return ResourceStatus(
+            data = request.asLiveData(),
+            networkState = request.status,
+            retry = { }
+        )
+    }
+
 }
