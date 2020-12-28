@@ -23,6 +23,7 @@ import com.ct.framework.kt.KtViewModel
 import com.ct.framework.kt.KtVmFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private val vm: KtViewModel by viewModels { KtVmFactory(KtRepository(AppModule.getServiceApi())) }

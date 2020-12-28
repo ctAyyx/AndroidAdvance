@@ -68,6 +68,8 @@ dependencies {
     //Paging
     implementation deps.paging.runtime_ktx
 
+    //Paging3
+    //implementation deps.paging3.core
 
     //Retrofit
     implementation deps.retrofit.retrofit

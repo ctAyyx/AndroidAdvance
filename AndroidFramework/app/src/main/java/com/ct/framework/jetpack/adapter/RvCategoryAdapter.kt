@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ct.framework.BR
 import com.ct.framework.databinding.ItemGirlListBinding
 import com.ct.framework.jetpack.vo.GirlList
 

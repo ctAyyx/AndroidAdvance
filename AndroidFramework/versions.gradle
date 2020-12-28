@@ -24,10 +24,13 @@ versions.datastore = '1.0.0-alpha01'
 versions.nav_version = '2.3.2'
 //分页
 versions.paging = '2.1.1'
+versions.paging3 = '3.0.0-alpha11'
 //生命周期感知
 versions.lifecycle = '2.2.0'
 //Room库
-versions.room = '2.2.5'
+//versions.room = '2.2.5'
+//为了使用Paging3
+versions.room = '2.3.0-alpha01'
 //Work
 versions.work = '2.4.0'
 //设置库
@@ -60,6 +63,7 @@ gradle.gradle = "com.android.tools.build:gradle:$versions.gradle"
 def kotlin = [:]
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 kotlin.jdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
 def build = [:]
 build.min_sdk = 19
@@ -117,6 +121,11 @@ paging.rxjava2_ktx = "androidx.paging:paging-rxjava2-ktx:$versions.paging"
 paging.rxjava2 = "androidx.paging:paging-rxjava2:$versions.paging"
 paging.test_ktx = "androidx.paging:paging-common-ktx:$versions.paging"
 paging.test = "androidx.paging:paging-common:$versions.paging"
+
+
+//Paging3
+def paging3 = [:]
+paging3.core = "androidx.paging:paging-runtime:$versions.paging3"
 
 
 lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel:$versions.lifecycle"
@@ -214,6 +223,7 @@ deps.androidx = androidx
 deps.datastore = datastore
 deps.navigation = navigation
 deps.paging = paging
+deps.paging3 = paging3
 deps.lifecycle = lifecycle
 deps.room = room
 deps.work = work
