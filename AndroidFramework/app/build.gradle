@@ -85,8 +85,8 @@ dependencies {
     //Hilt
     implementation deps.hilt.core
     kapt deps.hilt.kapt
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
-    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
     //WorkManager
     implementation deps.work.core

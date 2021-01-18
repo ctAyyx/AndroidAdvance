@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.ArrayMap
 import androidx.collection.SparseArrayCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.ct.framework.jetpack.di.AppModule
 import com.ct.framework.jetpack.dto.Category
 import com.ct.framework.kt.KtRepository
@@ -27,6 +25,7 @@ import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private val vm: KtViewModel by viewModels { KtVmFactory(KtRepository(AppModule.getServiceApi())) }
+    private val lifecycleHolder = MyHolder()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,11 +50,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         //关于 异步流
         //   doMain3()
-
         toTestFm("FM1")
         toTestFmClick()
         SparseArrayCompat<String>()
-
+        lifecycleHolder.onCreate()
     }
 
     fun onClick(view: View) {
@@ -81,6 +79,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onStart() {
         super.onStart()
         Log.e("TAG", "onStart")
+        lifecycleHolder.onStart()
     }
 
     override fun onRestart() {
@@ -96,6 +95,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onPause() {
         super.onPause()
         Log.e("TAG", "onPause")
+        lifecycleHolder.onStop()
     }
 
     override fun onStop() {
@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onDestroy() {
         super.onDestroy()
         Log.e("TAG", "onDestroy")
+        lifecycleHolder.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -228,6 +229,38 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
 }
 
+// 自定义 LifecycleOwner
+class MyHolder : LifecycleOwner,CoroutineScope by MainScope() {
+
+    private lateinit var lifecycleRegister: LifecycleRegistry
+
+
+    fun onCreate() {
+        lifecycleRegister = LifecycleRegistry(this)
+        lifecycleRegister.currentState = Lifecycle.State.CREATED
+        lifecycleScope.launch {  }
+    }
+
+    fun onStart() {
+        lifecycleRegister.currentState = Lifecycle.State.STARTED
+    }
+
+    fun onStop() {
+        lifecycleRegister.currentState = Lifecycle.State.RESUMED
+    }
+
+    fun onDestroy() {
+        lifecycleRegister.currentState = Lifecycle.State.DESTROYED
+    }
+
+
+    override fun getLifecycle(): Lifecycle {
+        return lifecycleRegister
+    }
+
+}
+
+
 class MainFragment : Fragment() {
 
     var TAG = ""
@@ -291,4 +324,6 @@ class MainFragment : Fragment() {
         super.onDetach()
         Log.e(TAG, "onDetach")
     }
+
+
 }

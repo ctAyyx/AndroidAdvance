@@ -22,6 +22,10 @@ import ct.com.basics.genericity.vo.Plate;
 class LimitDemo {
 
 
+    public static void main(String[] args) {
+        new LimitDemo().limit01();
+    }
+
     /**
      * 泛型限定
      */
@@ -82,9 +86,10 @@ class LimitDemo {
         //plate.setT(new Apple());
         Fruit fruit = plate.getT();
 
-        Plate<? super Fruit> plate1 = new Plate<Fruit>();
+        Plate<? super Fruit> plate1 = new Plate<>();
         plate1.setT(new Apple());
         plate1.setT(new Pear());
+        // plate1.setT(new Food());
         Object data = plate1.getT();
 
 

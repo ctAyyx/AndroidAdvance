@@ -6,7 +6,7 @@ import android.os.Parcel
 import android.util.Log
 
 
-class IPCStub : Binder(), IPCInterface {
+abstract class IPCStub : Binder(), IPCInterface {
 
 
     init {
@@ -29,16 +29,6 @@ class IPCStub : Binder(), IPCInterface {
         }
     }
 
-    private val mList = mutableListOf<Person>()
-
-    override fun addPerson(person: Person) {
-        mList.add(person)
-    }
-
-    override fun getPerson(): List<Person> {
-        return mList
-    }
-
     override fun asBinder(): IBinder {
         return this
     }
@@ -54,14 +44,14 @@ class IPCStub : Binder(), IPCInterface {
                 if (data.readInt() != 0) {
                     val person = Person(data)
                     Log.e("TAG", "$person 可以读取数据了")
-                    mList.add(person)
+                    addPerson(person)
                 }
                 reply?.writeNoException()
             }
             TRANSACTION_getPerson -> {
                 data.enforceInterface(DESCRIPTOR)
                 reply?.writeNoException()
-                reply?.writeTypedList(mList)
+                reply?.writeTypedList(getPerson())
             }
         }
         return true

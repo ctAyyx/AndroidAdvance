@@ -7,11 +7,18 @@
     android:orientation="vertical"
     tools:context=".Paging3Activity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_paging3_scheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onScheme"
+        android:text="通过Scheme跳转" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_paging3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+       >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_paging3"
@@ -19,4 +26,9 @@
             android:layout_height="wrap_content" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="240dp" />
 </LinearLayout>

@@ -1,0 +1,241 @@
+/* 依赖包 */
+
+ext.deps = [:]
+
+def versions = [:]
+//配置依赖
+versions.gradle = '4.1.1'
+versions.kotlin = '1.4.21'
+
+//核心库
+versions.core = '1.3.2'
+versions.appcompat = "1.2.0"
+versions.constraintlayout = '2.0.4'
+versions.material = '1.2.1'
+
+//Jetpack
+//应用启动依赖
+versions.startup = '1.0.0-alpha03'
+//DataStore
+versions.datastore = '1.0.0-alpha01'
+//导航栏
+versions.nav_version = '2.3.2'
+//分页
+versions.paging = '2.1.1'
+versions.paging3 = '3.0.0-alpha11'
+//生命周期感知
+versions.lifecycle = '2.2.0'
+//Room库
+//versions.room = '2.2.5'
+//为了使用Paging3
+versions.room = '2.3.0-alpha01'
+//Work
+versions.work = '2.4.0'
+//设置库
+versions.preference = '1.1.0'
+//DI注入库
+versions.dagger = '2.27'
+versions.hilt = '2.28-alpha'
+
+//常用三方库
+versions.glide = '4.11.0'
+
+//网络
+versions.retrofit = '2.9.0'
+//Rx
+versions.rxAndroid = '3.0.0'
+versions.rx = '3.0.1'
+//内存泄漏
+versions.leakcanary = '2.2'
+
+//二维码扫描 生成
+versions.zxing = '3.3.1'
+//屏幕适配
+versions.autosize = '1.2.1'
+//权限管理
+versions.permission = '3.0.0'
+
+def gradle = [:]
+gradle.gradle = "com.android.tools.build:gradle:$versions.gradle"
+
+def kotlin = [:]
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.jdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+
+def build = [:]
+build.min_sdk = 21
+build.target_sdk = 30
+build.tool = '29.0.3'
+build.version_code = 1
+build.version_name = '1.0'
+
+
+//Androidx
+def androidx = [:]
+androidx.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+androidx.core = "androidx.core:core-ktx:$versions.core"
+androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+androidx.design = "com.google.android.material:material:$versions.material"
+
+androidx.swipe = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.material"
+androidx.recycler = "androidx.recyclerview:recyclerview:$versions.material"
+
+
+//DataStore
+def datastore = [:]
+datastore.core = "androidx.datastore:datastore-core:$versions.datastore"
+datastore.preferences = "androidx.datastore:datastore-preferences:$versions.datastore"
+
+//Navigation
+def navigation = [:]
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.nav_version"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.nav_version"
+//动态模块支持库
+navigation.dynamic = "androidx.navigation:navigation-dynamic-features-fragment:$versions.nav_version"
+//测试
+navigation.test = "androidx.navigation:navigation-testing:$versions.nav_version"
+//插件
+navigation.safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav_version"
+//Jetpack
+navigation.jetpack = "androidx.navigation:navigation-compose:1.0.0-alpha03"
+
+
+//Lifecycle
+def lifecycle = [:]
+lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+lifecycle.runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+//如果使用Java8 用它来取代lifecycle-compiler
+lifecycle.java8_ktx = "androidx.lifecycle:lifecycle-reactivestreams-ktx:$versions.lifecycle"
+
+//Paging
+def paging = [:]
+paging.runtime_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging"
+paging.runtime = "androidx.paging:paging-runtime:$versions.paging"
+
+//RxJava2
+paging.rxjava2_ktx = "androidx.paging:paging-rxjava2-ktx:$versions.paging"
+paging.rxjava2 = "androidx.paging:paging-rxjava2:$versions.paging"
+paging.test_ktx = "androidx.paging:paging-common-ktx:$versions.paging"
+paging.test = "androidx.paging:paging-common:$versions.paging"
+
+
+//Paging3
+def paging3 = [:]
+paging3.core = "androidx.paging:paging-runtime-ktx:$versions.paging3"
+
+
+lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel:$versions.lifecycle"
+lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle"
+lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+lifecycle.java8 = "androidx.lifecycle:lifecycle-reactivestreams:$versions.lifecycle"
+
+lifecycle.savedstate = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycle"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"//kapt annotationProcessor
+lifecycle.testing = "androidx.arch.core:core-testing:$versions.lifecycle"//testImplementation
+
+
+//Room
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"//kapt annotationProcessor
+//支持Kotlin协同程序
+room.extension = "androidx.room:room-ktx:$versions.room"
+//支持RxJava2
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+//支持Guava
+room.guava = "androidx.room:room-guava:$versions.room"
+//测试
+room.test = "androidx.room:room-testing:$versions.room"//testImplementation
+
+//WorkManager
+def work = [:]
+work.core = "androidx.work:work-runtime-ktx:$versions.work"
+
+//设置库
+def preference = [:]
+preference.preference_ktx = "androidx.preference:preference-ktx:$versions.preference"
+preference.preference = "androidx.preference:preference:$versions.preference"
+
+
+//Retrofit
+def retrofit = [:]
+retrofit.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.rxjava3 = "com.squareup.retrofit2:adapter-rxjava3:$versions.retrofit"
+
+def rx2 = [:]
+rx2.android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+rx2.rx = "io.reactivex.rxjava3:rxjava:$versions.rx"
+
+//Glide
+def glide = [:]
+glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide" //annotationProcessor  kapt
+
+//Dagger2
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger" //kapt annotationProcessor
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.android_processor = "com.google.dagger:dagger-android-processor:$versions.dagger"//kapt annotationProcessor
+
+//Hilt
+def hilt = [:]
+hilt.core = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.kapt = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+hilt.plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+hilt.viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
+hilt.compiler = "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+
+
+//Zxing
+def zxing = [:]
+zxing.core = "com.google.zxing:core:$versions.zxing"
+
+//AutoSize
+def autosize = [:]
+autosize.core = "me.jessyan:autosize:$versions.autosize"
+
+//EasyPermission
+def permission = [:]
+permission.core = "pub.devrel:easypermissions:$versions.permission"
+
+def multidex = [:]
+multidex.core = "com.android.support:multidex:1.0.3"
+
+def leakcanary = [:]
+leakcanary.android = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"//debugImplementation
+
+def test = [:]
+test.junit = "junit:junit:4.13.1"
+test.runner = "androidx.test.ext:junit:1.1.2"
+test.espresso = "androidx.test.espresso:espresso-core:3.3.0"
+
+deps.gradle = gradle
+deps.kotlin = kotlin
+deps.build = build
+deps.androidx = androidx
+deps.datastore = datastore
+deps.navigation = navigation
+deps.paging = paging
+deps.paging3 = paging3
+deps.lifecycle = lifecycle
+deps.room = room
+deps.work = work
+deps.retrofit = retrofit
+deps.rx2 = rx2
+deps.glide = glide
+deps.dagger = dagger
+deps.hilt = hilt
+deps.zxing = zxing
+deps.autosize = autosize
+deps.permission = permission
+deps.multidex = multidex
+deps.test = test
+
+
+
+

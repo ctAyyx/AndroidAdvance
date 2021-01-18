@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.ct.framework.adapter.BindBRVo" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".adapter.BindActivity">
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_bind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={model.home}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_bind_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{model.home}"
+            android:textColor="#FF00FF"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_bind_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{listener}"
+            android:text="修改Home值" />
+
+
+    </LinearLayout>
+</layout>

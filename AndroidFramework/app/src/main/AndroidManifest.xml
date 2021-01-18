@@ -13,24 +13,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".adapter.AdapterActivity">
+        <activity android:name=".lifecycle.LifecycleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-        <activity android:name=".nav.NavActivity"></activity>
-        <activity android:name=".binder.IPCClientActivity" />
+        <activity android:name=".adapter.BindActivity"></activity>
+        <activity android:name=".adapter.AdapterActivity" />
+        <activity android:name=".nav.NavActivity" />
+        <activity android:name=".binder.IPCClientActivity"></activity>
         <activity android:name=".room.RoomActivity">
+
 
         </activity>
         <activity android:name=".work.WorkActivity" />
         <activity android:name=".hilt.HiltActivity" />
-        <activity android:name=".jetpack2.ui.GankIoActivity"></activity>
+        <activity android:name=".jetpack2.ui.GankIoActivity" />
         <activity android:name=".jetpack.JetpackActivity" />
         <activity android:name=".jetpack.JetpackActivity02" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <!-- 协议 -->
+                <data android:scheme="frame" />
+                <!-- 主机名   端口 -->
+                <data
+                    android:host="*.google.com"
+                    android:port="8080" />
+                <!-- 路径  需要完全匹配 -->
+                <data android:path="/MainActivity" />
+                <!-- 路径 需要开头匹配 -->
+                <!-- <data android:pathPrefix="/Main" /> -->
+                <!-- 路径 可以使用通配符 * 0到多个 . 任意字符  .* 0到多个任意字符 -->
+                <!-- <data android:pathPattern=".*Activity" /> -->
+
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".binder.IPCService"

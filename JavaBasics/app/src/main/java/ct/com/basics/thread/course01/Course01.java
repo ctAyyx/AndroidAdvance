@@ -18,8 +18,18 @@ public class Course01 {
         //course.startThread();
 
         //停止线程
-       // course.stopThread();
-        course.stopThread02();
+        // course.stopThread();
+        //course.stopThread02();
+
+        //测试守护线程
+        //整个主线程销毁了 它就销毁了
+        //course.daemon();
+
+        //wait  notify
+        //course.team();
+
+        //
+        course.pause();
     }
 
 
@@ -90,10 +100,38 @@ public class Course01 {
 
 
         try {
-            Thread.sleep(5*1000);
+            Thread.sleep(5 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void daemon() {
+        new Thread06().start();
+
+        try {
+            Thread.sleep(10 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 线程协作
+     * wait notify/notifyAll
+     * <p>
+     * 需要 synchronized 关键字修饰的方法 或则代码块
+     */
+
+    private void team() {
+
+        Food food = new Food();
+        Thread provider = new Thread(new Food.Provider(food));
+        Thread check = new Thread(new Food.Check(food));
+
+        provider.start();
+        check.start();
+
     }
 
 
@@ -147,12 +185,14 @@ public class Course01 {
 
 
     class Thread05 extends Thread {
+        private int num = 0;
+
         @Override
         public void run() {
             while (true) {
                 try {
                     Thread.sleep(300);
-                    CLog.log("------------------->");
+                    CLog.log("------------------->" + num++);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -160,6 +200,118 @@ public class Course01 {
         }
     }
 
+
+    class Thread06 extends Thread {
+        @Override
+        public void run() {
+            Thread05 thread = new Thread05();
+//设置Thread05为当前线程的守护线程
+            thread.setDaemon(true);
+            thread.start();
+
+
+            try {
+                Thread.sleep(5 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    /**
+     * sleep yield wait
+     * <p>
+     * 不同方法对锁的持有
+     * <p>
+     * sleep 和 yield 都不会释放锁
+     */
+    private static final String pauseLock = "pause";
+
+    private void pause() {
+        SleepRun sleepRun = new SleepRun();
+        YieldRun yieldRun = new YieldRun();
+        WaitRun waitRun = new WaitRun();
+
+        Thread thread1 = new Thread(sleepRun);
+        Thread thread2 = new Thread(yieldRun);
+        Thread thread3 = new Thread(waitRun);
+        thread2.start();
+        thread1.start();
+        //thread3.start();
+
+    }
+
+    static class SleepRun implements Runnable {
+
+        private JoinRun joinRun = new JoinRun();
+
+        @Override
+        public void run() {
+            synchronized (pauseLock) {
+                try {
+
+                    System.out.println("Sleep 5");
+                    joinRun.start();
+                    joinRun.join();
+                    Thread.sleep(5000);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    static class YieldRun extends Thread {
+
+        @Override
+        public void run() {
+            synchronized (pauseLock) {
+                System.out.println("Yield ");
+                yield();
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Yield ");
+
+            }
+        }
+    }
+
+    static class WaitRun implements Runnable {
+
+        @Override
+        public void run() {
+            synchronized (pauseLock) {
+                try {
+                    System.out.println("Wait ");
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    static class JoinRun extends Thread {
+
+        @Override
+        public void run() {
+            synchronized (pauseLock) {
+                try {
+                    System.out.println("Join ");
+                    Thread.sleep(3000);
+                    System.out.println("Join Over");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
 
 

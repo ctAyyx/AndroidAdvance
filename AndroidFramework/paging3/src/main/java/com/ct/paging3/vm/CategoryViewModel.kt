@@ -22,11 +22,11 @@ class CategoryViewModel(private val serviceApi: ServiceApi, private val dao: Cat
     @OptIn(ExperimentalPagingApi::class)
     val pager = Pager(
         config = PagingConfig(pageSize = 10),
-        initialKey = 1,
+        initialKey = 0,
         remoteMediator = ExampleRemoteMediator(serviceApi, dao)
     ) {
         dao.pagingSource()
-    }.flow
+    }.liveData
 
 
 

@@ -8,7 +8,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import ct.com.basics.CLog;
 
 /**
- * 阻塞队列
+ * 阻塞队列(BlockingQueue)
+ * 非阻塞方法
+ * add      remove 操作失败 抛出异常
+ * offer    poll   操作失败 返回false或Null
+ * 阻塞方法
+ * put      take
+ *
  * <p>
  * ArrayBlockingQueue      一个有数组结构组成的有界阻塞队列
  * LinkedBlockingQueue     一个由链表结构组成的有界阻塞队列
@@ -33,8 +39,8 @@ public class BlockingQueueDemo {
         //fair 是否是公平锁 主要是针对锁
         final ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<String>(16, true);
 
-        ProducerThread producer01 = new ProducerThread(queue,3000);
-        ProducerThread producer02 = new ProducerThread(queue,3000);
+        ProducerThread producer01 = new ProducerThread(queue, 3000);
+        ProducerThread producer02 = new ProducerThread(queue, 3000);
 
         ConsumerThread consumer01 = new ConsumerThread(queue);
         ConsumerThread consumer02 = new ConsumerThread(queue);
@@ -47,12 +53,12 @@ public class BlockingQueueDemo {
     }
 
 
-    private static void useLinkedBlockingQueue(){
+    private static void useLinkedBlockingQueue() {
         //capacity  队列的容量
         final LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>(16);
 
-        ProducerThread producer01 = new ProducerThread(queue,3000);
-        ProducerThread producer02 = new ProducerThread(queue,3000);
+        ProducerThread producer01 = new ProducerThread(queue, 3000);
+        ProducerThread producer02 = new ProducerThread(queue, 3000);
 
         ConsumerThread consumer01 = new ConsumerThread(queue);
         ConsumerThread consumer02 = new ConsumerThread(queue);
@@ -62,7 +68,6 @@ public class BlockingQueueDemo {
         consumer01.start();
         consumer02.start();
     }
-
 
 
     private static class ProducerThread extends Thread {

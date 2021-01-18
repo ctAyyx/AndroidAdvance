@@ -28,15 +28,15 @@ class Main {
 
     public static void main(String[] args) {
         //getTomClass();
-        // getConstructorAndBuild();
+        //getConstructorAndBuild();
         //getField();
         //getMethod();
 
         //针对泛型的反射
         //getTypeVariable();
-        getParameterizedType();
+        //getParameterizedType();
         //getGenericArrayType();
-        //getWildcardType();
+        getWildcardType();
 
         //getGenericType();
     }
@@ -94,26 +94,34 @@ class Main {
 
             for (Constructor constructor : constructors) {
                 CLog.log("获取Person类声明的公开的构造函数:" + constructor.getName() + "--获取权限修饰符" + Modifier.toString(constructor.getModifiers()));
+                for (Class cls2 : constructor.getParameterTypes()) {
+                    CLog.log("获取指定的公开的构造方法:" + cls2.getName());
+                }
+                CLog.log("=================================");
             }
-            Constructor constructor = cls.getConstructor(int.class, String.class);
-            for (Class cls2 : constructor.getParameterTypes()) {
-                CLog.log("获取指定的公开的构造方法:" + cls2.getName());
-            }
-
+//            Constructor constructor = cls.getConstructor(int.class, String.class);
+//            for (Class cls2 : constructor.getParameterTypes()) {
+//                CLog.log("获取指定的公开的构造方法:" + cls2.getName());
+//            }
             Constructor<?>[] constructors2 = cls.getDeclaredConstructors();
             for (Constructor constructor2 : constructors2) {
                 CLog.log("获取Person类声明的构造函数:" + constructor2.getName() + "--获取权限修饰符" + Modifier.toString(constructor2.getModifiers()));
+                for (Class cls2 : constructor2.getParameterTypes()) {
+                    CLog.log("获取指定的构造方法:" + cls2.getName());
+                }
+                CLog.log("=================================");
             }
-            Constructor constructor2 = cls.getDeclaredConstructor(String.class, int.class, int.class);
-            for (Class cls2 : constructor2.getParameterTypes()) {
-                CLog.log("获取指定的构造方法:" + cls2.getName());
-            }
+//            Constructor constructor2 = cls.getDeclaredConstructor(String.class, int.class, int.class);
+//            for (Class cls2 : constructor2.getParameterTypes()) {
+//                CLog.log("获取指定的构造方法:" + cls2.getName());
+//            }
 
 
             //构建对象
             Person person = (Person) cls.newInstance();
             CLog.log("通过Class.newInstance创建对象，只能创建有无参且公开的构造函数的对象" + person);
 
+            CLog.log("=================================");
             //通过获取指定构造函数穿件对象
             Constructor constructor3 = cls.getDeclaredConstructor(String.class, int.class, int.class);
             if (!constructor3.isAccessible())//如果构造函数不是公开的
@@ -133,7 +141,7 @@ class Main {
     private static void getField() {
 
         try {
-            Class cls = Class.forName("ct.com.basics.reflect.vo.Person");
+            Class cls = Class.forName("ct.com.basics.reflect.vo.Tom");
 
             //获取Class声明的所有公开字段 包括父类的公开字段
             Field[] fields = cls.getFields();
@@ -144,7 +152,9 @@ class Main {
                         "---字段声明的类:" + field.getDeclaringClass().getName()
                 );
             }
+            CLog.log("======================================");
             //获取Class声明的所有字段 不包括父类的字段
+
             Field[] declaredFields = cls.getDeclaredFields();
 
             for (Field field : declaredFields) {
@@ -155,7 +165,22 @@ class Main {
                 );
 
             }
+            CLog.log("======================================");
+            //如果想要获取父类的字段
+            Class supCls = cls.getSuperclass();
+            if (supCls != null) {
+                declaredFields = supCls.getDeclaredFields();
+                for (Field field : declaredFields) {
+                    CLog.log("获取父类声明的字段:" + field.getName() +
+                            "--字段的修饰符:" + Modifier.toString(field.getModifiers()) +
+                            "--字段的类型" + field.getType().getName() +
+                            "---字段声明的类:" + field.getDeclaringClass().getName()
+                    );
 
+                }
+            }
+
+            CLog.log("======================================");
             //反射修改对象的字段
             Person person = new Person(18, "学生");
             CLog.log("反射修改前:" + person);
@@ -263,7 +288,7 @@ class Main {
     private static void getParameterizedType() {
         try {
 
-            TestType<Tom> type = new TestType<>();
+            TestType<Tom> type = new TestType<Tom>();
             Class cls = type.getClass();
             CLog.log(cls + "----" + cls.getGenericSuperclass());
 
@@ -276,10 +301,12 @@ class Main {
             //获取指定字段声明的所有泛型
             Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
 
+            //获取该Type所属的Type
+            //主要是匿名内部类
             System.out.println("==" + parameterizedType.getOwnerType());
-            System.out.println("获取引用类型Type:" + parameterizedType.getRawType());
+            System.out.println("获取原始的类型信息:" + parameterizedType.getRawType());
             for (Type type1 : actualTypeArguments) {
-                System.out.println("获取引用类型Type:" + type1.toString());
+                System.out.println("获取声明类型信息:" + type1.toString());
                 if (type1 instanceof ParameterizedType) {
                     ParameterizedType parameterizedType1 = (ParameterizedType) type1;
                     System.out.println("==" + parameterizedType1.getOwnerType());

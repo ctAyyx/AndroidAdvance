@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Jetpack</string>
+    <string name="btn_course_04">Lifecycle And LiveData</string>
+    <string name="str_kt">先测试一下协程</string>
+    <string name="str_coroutine_01">校验协程是否会阻塞主线程</string>
+    <string name="str_bind_lifecycle">绑定一个LifecycleObserver</string>
+</resources>

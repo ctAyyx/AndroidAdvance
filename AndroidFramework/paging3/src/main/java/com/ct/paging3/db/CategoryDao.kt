@@ -18,4 +18,14 @@ interface CategoryDao {
 
     @Query("DELETE FROM girllist")
     suspend fun clearAll()
+
+    @Query("SELECT * FROM girllist")
+    suspend fun getAllCategory(): List<GirlList>
+
+    @Query("SELECT COUNT(*) FROM girllist")
+    suspend fun  getCategorySize(): Int
+
+    @Query("SELECT * FROM girllist WHERE id=:id AND title=:title ")
+    suspend fun getCategory(id: String, title: String): List<GirlList>
+
 }

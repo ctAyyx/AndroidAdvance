@@ -7,6 +7,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.room.Room
+import com.bumptech.glide.util.LruCache
 import com.ct.framework.R
 import com.ct.framework.room.vo.*
 import com.google.gson.Gson
@@ -26,7 +27,6 @@ class RoomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
-
 
     }
 
@@ -67,20 +67,16 @@ class RoomActivity : AppCompatActivity() {
             RoomUser(
                 name = "张三2",
                 age = 10,
-                address = address1
-                ,
-                photos = mutableListOf("13540366155", "13540366156")
-                ,
+                address = address1,
+                photos = mutableListOf("13540366155", "13540366156"),
                 photos2 = mutableListOf(123, 456)
 
             ),
             RoomUser(
                 name = "李四2",
                 age = 15,
-                address = address2
-                ,
-                photos = mutableListOf("18080947066", "18080947067")
-                ,
+                address = address2,
+                photos = mutableListOf("18080947066", "18080947067"),
                 photos2 = mutableListOf(147, 258)
             )
         )
@@ -91,6 +87,14 @@ class RoomActivity : AppCompatActivity() {
 
     /**
      *定义一对一关系
+     *
+     * 例如，假设有一个音乐在线播放应用，用户在该应用中具有一个属于自己的歌曲库。每个用户只有一个库，而且每个库恰好对应于一个用户。因此，User 实体和 Library 实体之间就应存在一种一对一的关系。
+     * 首先，为您的两个实体分别创建一个类。其中一个实体(Library)必须包含一个变量，且该变量是对另一个实体的主键的引用。
+     *
+     * 如需查询用户列表和对应的库，您必须先在两个实体之间建立一对一关系。
+     * 为此，请创建一个新的数据类(UserAndLibrary)，其中每个实例都包含父实体的一个实例和与之对应的子实体实例。
+     * 将 @Relation 注释添加到子实体的实例，同时将 parentColumn 设置为父实体主键列的名称，并将 entityColumn 设置为引用父实体主键的子实体列的名称
+     *
      * */
     private fun useRoom02() {
         userDao.getUserAndLibrary()
@@ -110,6 +114,14 @@ class RoomActivity : AppCompatActivity() {
 
     /**
      * 定义一对多关系
+     *
+     * 每个用户可以创建任意数量的播放列表，但每个播放列表只能由一个用户创建。因此，User 实体和 Playlist 实体之间应存在一种一对多关系
+     * 子实体必须包含一个变量，且该变量是对父实体的主键的引用。
+     *
+     * 为了查询用户列表和对应的播放列表，您必须先在两个实体之间建立一对多关系。
+     * 为此，请创建一个新的数据类(UserAndPlayList)，其中每个实例都包含父实体的一个实例和与之对应的所有子实体实例的列表。
+     * 将 @Relation 注释添加到子实体的实例，同时将 parentColumn 设置为父实体主键列的名称，并将 entityColumn 设置为引用父实体主键的子实体列的名称。
+     *
      * */
     private fun useRoom03() {
 
@@ -133,14 +145,16 @@ class RoomActivity : AppCompatActivity() {
 
     /**
      * 多对多关系
+     * 每个播放列表都可以包含多首歌曲，每首歌曲都可以包含在多个不同的播放列表中。因此，Playlist 实体和 Song 实体之间应存在多对多的关系。
      *
-     * 在定义完所有实体后
+     * 首先，为您的两个实体分别创建一个类(PlayList Song)。
+     * 多对多关系与其他关系类型均不同的一点在于，子实体中通常不存在对父实体的引用。
+     * 因此，需要创建第三个类来表示两个实体之间的关联实体（即交叉引用表）（PlaylistAndSong）。交叉引用表中必须包含表中表示的多对多关系中每个实体的主键列。
+     * 在本例中，交叉引用表中的每一行都对应于 Playlist 实例和 Song 实例的配对，其中引用的歌曲包含在引用的播放列表中。
      *
      * 下一步取决于您想如何查询这些相关实体。
-
-    如果您想查询播放列表和每个播放列表所含歌曲的列表，则应创建一个新的数据类，其中包含单个 Playlist 对象，以及该播放列表所包含的所有 Song 对象的列表。
-    如果您想查询歌曲和每首歌曲所在播放列表的列表，则应创建一个新的数据类，其中包含单个 Song 对象，以及包含该歌曲的所有 Playlist 对象的列表。
-     *
+     * 如果您想查询播放列表和每个播放列表所含歌曲的列表，则应创建一个新的数据类（PlaylistAndSongs），其中包含单个 Playlist 对象，以及该播放列表所包含的所有 Song 对象的列表。
+     * 如果您想查询歌曲和每首歌曲所在播放列表的列表，则应创建一个新的数据类(SongAndPlaylists)，其中包含单个 Song 对象，以及包含该歌曲的所有 Playlist 对象的列表
      * */
     private fun useRoom04() {
 
@@ -194,7 +208,6 @@ class RoomActivity : AppCompatActivity() {
             PlaylistAndSong(6, 9)
         )
         userDao.insertPlaylistAndSong(*playlistAndSongs)
-
     }
 
 

@@ -1,8 +1,11 @@
 package com.ct.paging3
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -10,18 +13,20 @@ import androidx.lifecycle.observe
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.ct.paging3.adapter.CategoryAdapter
 import com.ct.paging3.db.AppDatabase
 import com.ct.paging3.di.AppModule
 import com.ct.paging3.vm.CategoryViewModel
 import com.ct.paging3.vm.CategoryViewModelFactory
 import kotlinx.android.synthetic.main.activity_paging3.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlin.concurrent.thread
 
 
-class Paging3Activity : AppCompatActivity() {
+class Paging3Activity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private val adapter = CategoryAdapter()
 
@@ -77,10 +82,26 @@ class Paging3Activity : AppCompatActivity() {
         rv_paging3.layoutManager = LinearLayoutManager(this)
         rv_paging3.adapter = adapter
 
-        lifecycleScope.launch {
-            vm.pager.collectLatest {
+
+//        launch {
+//            val dao = db.girlDao()
+//            val allList = dao.getAllCategory()
+//            val size = dao.getCategorySize()
+//            Log.e("TAG", "$size 数据库里面的数据:${allList}")
+//
+//        }
+//
+//
+//        launch {
+//            val allList = db.girlDao().getCategory("", "第75期")
+//            Log.e("TAG", "数据库里面查询的数据:${allList}")
+//        }
+
+        vm.pager.observe(this) {
+            lifecycleScope.launch {
                 adapter.submitData(it)
             }
+
         }
 
         swipe_paging3.isEnabled = true
@@ -95,6 +116,21 @@ class Paging3Activity : AppCompatActivity() {
             }
 
         }
+
+    }
+
+    fun onScheme(view: View) {
+
+        thread(start = true) {
+            Thread.sleep(3000)
+
+                val uri = "frame://www.google.com:8080/MainActivity?name=张三&age=10"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                startActivity(intent)
+                Log.e("TAG","去启动深度链接")
+
+        }
+
 
     }
 

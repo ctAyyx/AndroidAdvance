@@ -34,12 +34,6 @@ class Proxy(private val mRemote: IBinder) : IPCInterface {
             data.writeInterfaceToken(getInterfaceDescriptor())
             mRemote.transact(IPCStub.TRANSACTION_getPerson, data, reply, 0)
             reply.readException()
-//            var size = reply.readInt()
-//            while (size > 0) {
-//
-//                mList.add(Person(reply))
-//                size--
-//            }
             return reply.createTypedArrayList(Person.CREATOR)?.toList() ?: emptyList()
 
         } finally {

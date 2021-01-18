@@ -125,7 +125,7 @@ paging.test = "androidx.paging:paging-common:$versions.paging"
 
 //Paging3
 def paging3 = [:]
-paging3.core = "androidx.paging:paging-runtime:$versions.paging3"
+paging3.core = "androidx.paging:paging-runtime-ktx:$versions.paging3"
 
 
 lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel:$versions.lifecycle"
