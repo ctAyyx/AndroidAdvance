@@ -53,6 +53,7 @@ dependencies {
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.gson
     implementation deps.room.runtime
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt deps.room.compiler
     implementation deps.room.extension
     def paging_version = "3.0.0-alpha11"

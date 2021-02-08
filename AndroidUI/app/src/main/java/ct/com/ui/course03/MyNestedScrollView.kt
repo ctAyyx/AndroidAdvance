@@ -2,9 +2,26 @@ package ct.com.ui.course03
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.widget.NestedScrollView
+
+
+/**
+ *  NestedScrollingParent 嵌套滑动的父控件需要实现的接口
+ *
+ *  DOWN 事件
+ *  1. onStartNestedScroll      当子控件接收到DOWN事件的时候 会回调这个方法 判断父控件是否需要滑动
+ *  2. onNestedScrollAccepted   如果父控件接收了嵌套滑动 则会回调这个方法
+ *  MOVE 事件
+ *  3. onNestedPreScroll        当子控件准备开始滑动的时候 会调用这个方法 看父控件是否会消费这个滚动事件
+ *  4. onNestedScroll           当子控件在本次滚动完成后 会回调这个方法 看父控件是否会消费这个滚动事件
+ *  UP 事件
+ *  5. onNestedPreFling         在子控件消费这个Flying事件之前 看父控件是否消费
+ *  6. onNestedFling            在子控件判断是否消费这个Flying事件之后 看父控件是否继续消费
+ *  7. onStopNestedScroll       停止滚动
+ *
+ * */
+
 
 class MyNestedScrollView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -34,13 +51,17 @@ class MyNestedScrollView @JvmOverloads constructor(
     override fun onStartNestedScroll(child: View, target: View, axes: Int, type: Int): Boolean {
         Log.e(
             "NestedScrollView",
-            "onStartNestedScroll:child:$child -- target:$target -- axes:$axes -- type:$type"
+            "onStartNestedScroll:child:${child::class.simpleName} -- target:${target::class.simpleName} -- axes:$axes -- type:$type"
         )
+
         return super.onStartNestedScroll(child, target, axes, type)
     }
 
     override fun onStartNestedScroll(child: View, target: View, nestedScrollAxes: Int): Boolean {
-        Log.e("NestedScrollView", "onStartNestedScroll:child:$child -- target:$target")
+        Log.e(
+            "NestedScrollView",
+            "onStartNestedScroll(1):child:${child::class.simpleName} -- target:${target::class.simpleName} -- $nestedScrollAxes"
+        )
         return super.onStartNestedScroll(child, target, nestedScrollAxes)
     }
 
@@ -57,32 +78,37 @@ class MyNestedScrollView @JvmOverloads constructor(
     override fun onNestedScrollAccepted(child: View, target: View, axes: Int, type: Int) {
         Log.e(
             "NestedScrollView",
-            "onNestedScrollAccepted:child:$child -- target:$target -- axes:$axes -- type:$type"
+            "onNestedScrollAccepted:child:${child::class.simpleName} -- target:${target::class.simpleName} -- axes:$axes -- type:$type"
         )
         super.onNestedScrollAccepted(child, target, axes, type)
     }
 
     override fun onNestedScrollAccepted(child: View, target: View, nestedScrollAxes: Int) {
-        Log.e("NestedScrollView", "onNestedScrollAccepted:child:$child -- target:$target ")
+        Log.e(
+            "NestedScrollView",
+            "onNestedScrollAccepted:child:${child::class.simpleName} -- target:${target::class.simpleName} "
+        )
         super.onNestedScrollAccepted(child, target, nestedScrollAxes)
     }
 
     //=============================当嵌套滚动开始前 MOVE事件=============================
 
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray) {
+
+        super.onNestedPreScroll(target, dx, dy, consumed)
         Log.e(
             "NestedScrollView",
-            "onNestedPreScroll: target:$target --- dx:$dx --- dy:$dy -- ${consumed.contentToString()}"
+            "onNestedPreScroll: target:${target::class.simpleName} --- dx:$dx --- dy:$dy -- ${consumed.contentToString()}"
         )
-        super.onNestedPreScroll(target, dx, dy, consumed)
     }
 
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
+
+        super.onNestedPreScroll(target, dx, dy, consumed, type)
         Log.e(
             "NestedScrollView",
-            "onNestedPreScroll: target:$target --- dx:$dx --- dy:$dy -- consumed:${consumed.contentToString()} -- type:$type"
+            "onNestedPreScroll: target:${target::class.simpleName} --- dx:$dx --- dy:$dy -- consumed:${consumed.contentToString()} -- type:$type"
         )
-        super.onNestedPreScroll(target, dx, dy, consumed, type)
     }
 
     //==================== 当开始嵌套滚动事件 ============================
@@ -95,10 +121,7 @@ class MyNestedScrollView @JvmOverloads constructor(
         type: Int,
         consumed: IntArray
     ) {
-        Log.e(
-            "NestedScrollView",
-            "onNestedScroll: target:$target --- dxConsumed:$dxConsumed --- dyConsumed:$dyConsumed -- dxUnconsumed:$dxUnconsumed -- dyUnconsumed:$dyUnconsumed-- ${consumed.contentToString()}"
-        )
+
         super.onNestedScroll(
             target,
             dxConsumed,
@@ -107,6 +130,10 @@ class MyNestedScrollView @JvmOverloads constructor(
             dyUnconsumed,
             type,
             consumed
+        )
+        Log.e(
+            "NestedScrollView",
+            "onNestedScroll(3): target:${target::class.simpleName} --- dxConsumed:$dxConsumed --- dyConsumed:$dyConsumed -- dxUnconsumed:$dxUnconsumed -- dyUnconsumed:$dyUnconsumed-- ${consumed.contentToString()}"
         )
     }
 
@@ -118,11 +145,12 @@ class MyNestedScrollView @JvmOverloads constructor(
         dyUnconsumed: Int,
         type: Int
     ) {
+
+        super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type)
         Log.e(
             "NestedScrollView",
-            "onNestedScroll: target:$target --- dxConsumed:$dxConsumed --- dyConsumed:$dyConsumed -- dxUnconsumed:$dxUnconsumed -- dyUnconsumed:$dyUnconsumed"
+            "onNestedScroll: target:${target::class.simpleName} --- dxConsumed:$dxConsumed --- dyConsumed:$dyConsumed -- dxUnconsumed:$dxUnconsumed -- dyUnconsumed:$dyUnconsumed"
         )
-        super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type)
     }
 
     override fun onNestedScroll(
@@ -132,30 +160,63 @@ class MyNestedScrollView @JvmOverloads constructor(
         dxUnconsumed: Int,
         dyUnconsumed: Int
     ) {
+
+        super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
         Log.e(
             "NestedScrollView",
-            "onNestedScroll: target:$target --- dxConsumed:$dxConsumed --- dyConsumed:$dyConsumed -- dxUnconsumed:$dxUnconsumed -- dyUnconsumed:$dyUnconsumed"
+            "onNestedScroll: target:${target::class.simpleName} --- dxConsumed:$dxConsumed --- dyConsumed:$dyConsumed -- dxUnconsumed:$dxUnconsumed -- dyUnconsumed:$dyUnconsumed"
         )
-        super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
     }
+
+//    override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
+//        Log.e(
+//            "NestedScrollView",
+//            "onNestedPreFling: target:${target::class.simpleName} --- velocityX:$velocityX --- velocityY:$velocityY "
+//        )
+//        return super.onNestedPreFling(target, velocityX, velocityY)
+//    }
+//
+//    /**
+//     * @param consumed 子控件是否消费了 Flying
+//     * */
+//    override fun onNestedFling(
+//        target: View,
+//        velocityX: Float,
+//        velocityY: Float,
+//        consumed: Boolean
+//    ): Boolean {
+//        Log.e(
+//            "NestedScrollView",
+//            "onNestedFling: target:${target::class.simpleName} --- velocityX:$velocityX --- velocityY:$velocityY -- consumed:$consumed"
+//        )
+//        return super.onNestedFling(target, velocityX, velocityY, consumed)
+//    }
+
 
     //========================停止嵌套滚动 ======================
 
-    override fun onStopNestedScroll(target: View) {
-        Log.e(
-            "NestedScrollView",
-            "onStopNestedScroll: target:$target "
-        )
-        super.onStopNestedScroll(target)
-    }
+//    override fun onStopNestedScroll(target: View) {
+//        Log.e(
+//            "NestedScrollView",
+//            "onStopNestedScroll: target:${target::class.simpleName} "
+//        )
+//        super.onStopNestedScroll(target)
+//    }
+//
+//    override fun onStopNestedScroll(target: View, type: Int) {
+//        Log.e(
+//            "NestedScrollView",
+//            "onStopNestedScroll: target:${target::class.simpleName} --- type:$type"
+//        )
+//        super.onStopNestedScroll(target, type)
+//    }
 
-    override fun onStopNestedScroll(target: View, type: Int) {
-        Log.e(
-            "NestedScrollView",
-            "onStopNestedScroll: target:$target --- type:$type"
-        )
-        super.onStopNestedScroll(target, type)
+    internal class Log {
+        companion object {
+            fun e(tag: String, msg: String) {
+                android.util.Log.e(tag, msg)
+            }
+        }
     }
-
 }
 

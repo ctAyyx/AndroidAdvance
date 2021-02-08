@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ct.com.ui.course13.widget.MyNestedParentLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".course13.Course13Activity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/skin_bg" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FAF0FA" />
+
+    <ct.com.ui.course13.widget.MyNestedChildView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:lineSpacingMultiplier="4"
+        android:text="@string/str_text"
+        android:textSize="16sp" />
+
+
+</ct.com.ui.course13.widget.MyNestedParentLayout>

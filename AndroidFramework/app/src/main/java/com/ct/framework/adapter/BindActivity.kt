@@ -21,9 +21,10 @@ class BindActivity : AppCompatActivity() {
     private val live = MutableLiveData<BindBRVo>(vo)
     //双向数据绑定
 
+    private lateinit var binding: ActivityBindBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding =
+        binding =
             DataBindingUtil.setContentView<ActivityBindBinding>(this, R.layout.activity_bind)
 
         binding.model = vo
@@ -37,7 +38,9 @@ class BindActivity : AppCompatActivity() {
     }
 
     private fun createListener() = View.OnClickListener {
-        vo.home = "双流"
+        binding.tvBind01.text = "新的地址"
+        binding.tvBind02.text = "奥迪A7"
+        Log.e("TAG", "====>$vo")
     }
 
 

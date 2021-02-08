@@ -10,12 +10,21 @@
         android:label="AFragment">
         <action
             android:id="@+id/action_AFragment_to_BFragment"
-            app:destination="@id/BFragment" />
+            app:destination="@id/BFragment">
+            <argument
+                android:name="name"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/BFragment"
         android:name="com.ct.framework.nav.host01.BFragment"
         android:label="BFragment">
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="a"
+            />
         <action
             android:id="@+id/action_BFragment_to_CFragment"
             app:destination="@id/CFragment" />

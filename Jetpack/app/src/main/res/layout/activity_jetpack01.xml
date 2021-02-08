@@ -27,6 +27,13 @@
             android:onClick="onClick"
             android:text="@string/str_bind_lifecycle"
             android:textAllCaps="false" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_liveDataBus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="@string/str_livedata_sticker"
+            android:textAllCaps="false" />
 
 
     </LinearLayout>

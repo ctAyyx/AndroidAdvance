@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ct.com.ui.course02.MyFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="#0AFFFF">
+
+    <androidx.appcompat.widget.AppCompatTextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="这里是文本"
+        android:textColor="#FF00FF"
+        android:textSize="16sp" />
+
+</ct.com.ui.course02.MyFrameLayout>

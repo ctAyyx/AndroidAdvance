@@ -2,9 +2,27 @@ package ct.com.ui.course03
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ *  NestedScrollingChild 嵌套滑动子控件需要实现的接口
+ *
+ *  DOWN 事件
+ *  1. startNestedScroll       子控件开始嵌套滑动 判断是否存在父控件会接受嵌套滚动事件
+ *  MOVE 事件
+ *  2. dispatchNestedPreScroll 子控件准备滚动前 分发事件给父控件 看父控件是否会消费事件
+ *  3. dispatchNestedScroll    子控件的一个嵌套滚动事件 自己完成后 分发给父控件  看父控件是否会消费事件
+ *  UP 事件
+ *  4. dispatchNestedPreFling 子控件在消费Flying事件之前 分发给父控件看父控件是否会消费事件
+ *  5. dispatchNestedFling    子控件在消费Flying事件之后 分发给父控件看父控件是否会消费事件
+ *  6. stopNestedScroll       子控件停止嵌套滚动 并通知父控件
+ *
+ *
+ *  7.isNestedScrollingEnabled 判断当前子控件是否开启嵌套滚动
+ *  8.hasNestedScrollingParent 判断当前子控件是否有处理嵌套滚动的父控件
+ *
+ *
+ * */
 class MyRecyclerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
@@ -43,7 +61,10 @@ class MyRecyclerView @JvmOverloads constructor(
         consumed: IntArray?,
         offsetInWindow: IntArray?
     ): Boolean {
-        Log.e("MyRecyclerView", "dispatchNestedPreScroll:dx:$dx -- dy:$dy ")
+        Log.e(
+            "MyRecyclerView",
+            "dispatchNestedPreScroll:dx:$dx -- dy:$dy consumed:${consumed?.contentToString()} "
+        )
         return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
     }
 
@@ -57,7 +78,10 @@ class MyRecyclerView @JvmOverloads constructor(
         offsetInWindow: IntArray?,
         type: Int
     ): Boolean {
-        Log.e("MyRecyclerView", "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed ")
+        Log.e(
+            "MyRecyclerView",
+            "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed  -- dxUnconsumed:$dxUnconsumed --dyUnconsumed:$dyUnconsumed --offsetInWindow${offsetInWindow?.contentToString()} -- type:$type "
+        )
         return super.dispatchNestedScroll(
             dxConsumed,
             dyConsumed,
@@ -75,7 +99,10 @@ class MyRecyclerView @JvmOverloads constructor(
         dyUnconsumed: Int,
         offsetInWindow: IntArray?
     ): Boolean {
-        //Log.e("MyRecyclerView", "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed ")
+        Log.e(
+            "MyRecyclerView",
+            "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed  -- dxUnconsumed:$dxUnconsumed --dyUnconsumed:$dyUnconsumed --offsetInWindow${offsetInWindow?.contentToString()} "
+        )
         return super.dispatchNestedScroll(
             dxConsumed,
             dyConsumed,
@@ -85,15 +112,36 @@ class MyRecyclerView @JvmOverloads constructor(
         )
     }
 
+//    override fun dispatchNestedPreFling(velocityX: Float, velocityY: Float): Boolean {
+//        return super.dispatchNestedPreFling(velocityX, velocityY)
+//    }
+//
+//    override fun dispatchNestedFling(
+//        velocityX: Float,
+//        velocityY: Float,
+//        consumed: Boolean
+//    ): Boolean {
+//        return super.dispatchNestedFling(velocityX, velocityY, consumed)
+//    }
+
 
     //=====================停止嵌套滚动 ================
-    override fun stopNestedScroll(type: Int) {
-        Log.e("MyRecyclerView", "stopNestedScroll:type:$type ")
-        super.stopNestedScroll(type)
-    }
-    override fun stopNestedScroll() {
-        super.stopNestedScroll()
-    }
+//    override fun stopNestedScroll(type: Int) {
+//        Log.e("MyRecyclerView", "stopNestedScroll:type:$type ")
+//        super.stopNestedScroll(type)
+//    }
+//
+//    override fun stopNestedScroll() {
+//        Log.e("MyRecyclerView", "stopNestedScroll ")
+//        super.stopNestedScroll()
+//    }
 
 
+    internal class Log {
+        companion object {
+            fun e(tag: String, msg: String) {
+                android.util.Log.e(tag, msg)
+            }
+        }
+    }
 }

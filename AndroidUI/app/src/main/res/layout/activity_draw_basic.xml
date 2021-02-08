@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".course05.basics.DrawBasicActivity">
 
     <!--  Canvas 和 Paint的常用方法  -->
@@ -16,19 +17,26 @@
     <ct.com.ui.course05.basics.PaintView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         />
+        android:visibility="gone" />
 
     <!-- Canvas对文字的绘制   -->
 
     <ct.com.ui.course05.basics.DrawTextView
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/mm" />
     <!--  Canvas裁剪和几何变换  -->
     <ct.com.ui.course05.basics.ClipView
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+        android:background="#00F0F0" />
 
-</FrameLayout>
+</LinearLayout>

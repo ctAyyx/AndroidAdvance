@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".course12.cs.ConstraintActivity"></activity>
+        <activity android:name=".course14.Course14Activity"/>
+        <activity android:name=".course13.Course13Activity" />
+        <activity android:name=".course09.Course09Activity" />
+        <activity android:name=".course03.FTaoBaoActivity" />
+        <activity android:name=".course02.LayoutInflaterActivity" />
+        <activity android:name=".course12.cs.ConstraintActivity" />
         <activity android:name=".course10.Course10Activity" />
         <activity android:name=".course03.Course03Activity" />
         <activity android:name=".course08.Course08Activity" />
@@ -19,7 +24,7 @@
         <activity android:name=".course12.Course12Activity" />
         <activity android:name=".course15.Course15Activity" />
         <activity android:name=".course05.Course05Activity" />
-        <activity android:name=".course05.basics.DrawBasicActivity" />
+        <activity android:name=".course05.basics.DrawBasicActivity"></activity>
         <activity android:name=".course04.demo01.LvAndVpActivity" />
         <activity android:name=".course04.Course04Activity" />
         <activity android:name=".course04.demo02.VpAndSwipeActivity" />

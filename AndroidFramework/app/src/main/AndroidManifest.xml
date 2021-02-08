@@ -13,31 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lifecycle.LifecycleActivity">
+        <activity android:name=".jetpack2.ui.UserInfoActivity">
+
+        </activity>
+        <activity android:name=".lifecycle.LifecycleActivity"></activity>
+        <activity android:name=".adapter.BindActivity"></activity>
+        <activity android:name=".adapter.AdapterActivity" />
+        <activity android:name=".nav.NavActivity">
+
+        </activity>
+        <activity android:name=".binder.IPCClientActivity" />
+        <activity android:name=".room.RoomActivity"></activity>
+        <activity android:name=".work.WorkActivity" />
+        <activity android:name=".hilt.HiltActivity" />
+        <activity android:name=".jetpack2.ui.GankIoActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
-        <activity android:name=".adapter.BindActivity"></activity>
-        <activity android:name=".adapter.AdapterActivity" />
-        <activity android:name=".nav.NavActivity" />
-        <activity android:name=".binder.IPCClientActivity"></activity>
-        <activity android:name=".room.RoomActivity">
-
-
-        </activity>
-        <activity android:name=".work.WorkActivity" />
-        <activity android:name=".hilt.HiltActivity" />
-        <activity android:name=".jetpack2.ui.GankIoActivity" />
         <activity android:name=".jetpack.JetpackActivity" />
         <activity android:name=".jetpack.JetpackActivity02" />
         <activity android:name=".MainActivity">
             <intent-filter>
-
-
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />

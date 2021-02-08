@@ -15,12 +15,13 @@ public class Demo {
 
     public static void main(String[] args) {
 
-        //doArray();
+        doArray();
         //doLinkedList();
         // doSort();
         //doString();
 
-        doTree();
+        //doTree();
+
         int a = 1444;
         System.out.println("&运算:" + (a & 11) + "----" + (a % 12));
 //        System.out.println("&运算:" + (a | 4 & 10));
@@ -30,7 +31,7 @@ public class Demo {
 //        List<List<Integer>> mList = generate(0);
 //        System.out.println("结果:" + mList);
 
-
+        System.out.println("获取所有二进制情况数量:" + getAllType(2));
     }
 
     private static void doTree() {
@@ -70,9 +71,11 @@ public class Demo {
 //        arr = new int[]{1, 2, 3, 1, 2, 3, 2, 3, 3};
 //        System.out.println("出现的次数是否唯一:" + uniqueOccurrences(arr));
 
-        arr = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-        System.out.println("是否是山峰数组:" + validMountainArray(arr));
+//        arr = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+//        System.out.println("是否是山峰数组:" + validMountainArray(arr));
 
+        arr = new int[]{1, 2, 3, 4, 5, 7, 8};
+        System.out.println("第一个不连续的自然数" + find(arr));
     }
 
 
@@ -189,6 +192,32 @@ public class Demo {
         return nums;
 
     }
+
+    /**
+     * 一个巨大无序数组中，查找一个不连续的自然数的节点
+     * 例如1，2，3，5，6，7...第一个不连续自然数的节点是4
+     */
+    public static int find(int[] nums) {
+        int num = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int num1 = nums[i];
+            if (num1 != num + i)
+                return num + i;
+        }
+        return -1;
+    }
+
+
+    /**
+     * 给定一个二进制串的位数，怎么枚举出所有情况
+     * 比如给出n=3作为位数，共有000,001,010,011,100,101,110,111 8种情况
+     */
+    public static int getAllType(int n) {
+        if (n == 1)
+            return 1;
+        return 1 << n;
+    }
+
 
     public static void insertSort(int[] nums) {
         for (int i = 1; i < nums.length; i++) {
@@ -554,8 +583,6 @@ public class Demo {
                     maxStr = maxStr.substring(0, j);
                     break;
                 }
-
-
             }
         }
 
@@ -880,62 +907,7 @@ public class Demo {
      */
     public static boolean uniqueOccurrences(int[] arr) {
 
-        if (arr == null || arr.length == 0)
-            return false;
-        if (arr.length == 1)
-            return true;
-
-
-        int low = 0;
-        int high = 1;
-        int size = arr.length;
-        TreeSet<Integer> set = new TreeSet<>();
-        int repeat = 1;
-
-        while (low < size) {
-            System.out.println("LOw:" + low + "---high:" + high);
-            if (high >= size) {
-                low++;
-                high = low + 1;
-                if (!set.add(repeat))
-                    return false;
-                else
-                    repeat = 1;
-            }
-
-            int num = arr[high];
-
-            if (num != arr[low]) {
-                high++;
-                continue;
-            }
-
-            while (low < high && arr[low + 1] == num) {
-                low++;
-                repeat++;
-            }
-            if (low == high) {
-                low = high;
-                high = low + 1;
-                continue;
-            }
-
-            if (low < high) {
-                int temp = arr[low + 1];
-                arr[low + 1] = num;
-                arr[high] = temp;
-
-                low++;
-                high++;
-                repeat++;
-            }
-
-            System.out.println(Arrays.toString(arr) + "日志:" + repeat);
-
-
-        }
-
-        return true;
+        return false;
 
     }
 
@@ -1432,8 +1404,6 @@ public class Demo {
         return result;
 
     }
-
-
 
 
     /**
@@ -2069,11 +2039,15 @@ public class Demo {
 
     /**
      * 编写一个程序，找到两个单链表相交的起始节点。
-     * 快慢指针
+     * 链表A a1->a2->c1->c2->c3
+     * 链表B b1->b2->b3->c1->c2->c3
+     * <p>
+     * 思路
+     * 链表A的路径 a1->a2->c1->c2->c3->null->b1->b2->b3->c1->c2->c3->null
+     * 链表B的路径 b1->b2->b3->c1->c2->c3->null->a1->a2->c1->c2->c3->null
+     * 当 链表A == 链表B 则为相交的节点 如果没有 则没有相交节点
      */
     public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-
-
         ListNode p = headA, q = headB;
         while (p != q) {
             p = (p == null) ? headB : p.next;

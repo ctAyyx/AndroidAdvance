@@ -1,5 +1,10 @@
 package com.ct.design.alg;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Recall {
     public static void main(String[] args) {
         new Recall().run();
@@ -31,6 +36,35 @@ public class Recall {
         }
 
 
+    }
+
+    /**
+     * 求一个数组的全排列
+     *
+     */
+    private List<List<Integer>> mList = new ArrayList<>();
+
+    private List<List<Integer>> arrange(int[] arr) {
+        List<Integer> list = new ArrayList<>();
+        range(arr, list);
+        return mList;
+    }
+
+    private void range(int[] arr, List<Integer> list) {
+
+        if (list.size() == arr.length) {
+            mList.add(new ArrayList<Integer>(list));
+            return;
+        }
+
+        for (int num : arr
+        ) {
+            if (list.contains(num))
+                continue;
+            list.add(num);
+            range(arr, list);
+            list.remove(num);
+        }
     }
 
 }

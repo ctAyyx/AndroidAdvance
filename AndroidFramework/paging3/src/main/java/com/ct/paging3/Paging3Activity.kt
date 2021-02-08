@@ -123,7 +123,6 @@ class Paging3Activity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         thread(start = true) {
             Thread.sleep(3000)
-
                 val uri = "frame://www.google.com:8080/MainActivity?name=张三&age=10"
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                 startActivity(intent)

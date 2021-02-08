@@ -33,9 +33,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{model.home}"
+            android:text="@={model.home}"
             android:textColor="#FF00FF"
             android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_bind_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@={model.car}"
+            android:textColor="#FF00FF"
+            android:textSize="14sp" />
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_bind_01"

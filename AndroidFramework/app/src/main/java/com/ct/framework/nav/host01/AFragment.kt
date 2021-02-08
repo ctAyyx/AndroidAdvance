@@ -14,8 +14,11 @@ class AFragment : BaseFragment() {
 
     override fun initBtn01Text() = "导航到BFragment"
     override fun onBtn01Click(view: View) {
-        view.findNavController()
-            .navigate(R.id.action_AFragment_to_BFragment)
+//        view.findNavController()
+//            .navigate(R.id.action_AFragment_to_BFragment)
+
+        val a = AFragmentDirections.actionAFragmentToBFragment("XXX")
+        findNavController(this).navigate(a)
 
 //        val request = NavDeepLinkRequest.Builder
 //            .fromUri("android-app://androidx.navigation.app/profile".toUri())

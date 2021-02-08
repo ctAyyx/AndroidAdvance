@@ -2,9 +2,11 @@ package com.ct.jetpack.course04
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import com.ct.jetpack.R
 import com.ct.jetpack.databinding.ActivityJetpack01Binding
 
@@ -27,8 +29,7 @@ class Jetpack01Activity : AppCompatActivity() {
             this,
             R.layout.activity_jetpack01
         )
-
-
+        toTestLiveDataBus()
     }
 
 
@@ -52,14 +53,51 @@ class Jetpack01Activity : AppCompatActivity() {
     }
 
 
+    /**
+     * 源码的思维导图 都在 百度脑图
+     * */
     private fun useDataBinding() {
         //对 DataBinding 的使用
         //源码 如何实现数据自动刷新到界面的??
     }
 
+
+    private fun useViewModel() {
+        //源码 查看ViewModel 的创建 和生命周期
+        val vm = ViewModelProvider(this)
+            .get(MyViewModel::class.java)
+
+    }
+
+
+    override fun onRetainCustomNonConfigurationInstance(): Any? {
+        Log.e("TAG", "onRetainCustomNonConfigurationInstance")
+        return super.onRetainCustomNonConfigurationInstance()
+    }
+
+    override fun getLastNonConfigurationInstance(): Any? {
+        Log.e("TAG", "getLastNonConfigurationInstance")
+        return super.getLastNonConfigurationInstance()
+    }
+
+
+    private fun toTestLiveDataBus() {
+        //LiveDataBus.get().with("Sticker", String::class.java).value = "发送新的事件"
+
+        LiveDataBus.get().with("Sticker", String::class.java)
+            .observe(this) {
+                Log.e("TAG", "$this-->LiveDataBus粘性事件:$it")
+            }
+
+    }
+
+
     fun onClick(view: View) {
         when (view.id) {
             R.id.btn_lifecycle -> registerLifecycle()
+            R.id.btn_liveDataBus -> toTestLiveDataBus()
         }
     }
+
+
 }

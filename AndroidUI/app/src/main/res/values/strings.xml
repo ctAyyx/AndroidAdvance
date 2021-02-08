@@ -13,14 +13,16 @@
     <string name="btn_course05_01">绘制基础练习</string>
     <string name="btn_course07">第七节:锦鲤鱼的绘制</string>
     <string name="btn_course08">第八节:锦鲤鱼添加动画</string>
+    <string name="btn_course09">第九节:Rv粘性头部</string>
     <string name="btn_course10">第十节:RV的缓存复用机制和自定义LayoutManager</string>
 
     <string name="btn_course12">第十二节:MD的基本使用</string>
     <string name="btn_course13">第十三节:嵌套滑动机制(NestedScroll)</string>
-    <string name="btn_course14">第十四节:PhotoView的实现</string>
+    <string name="btn_course14">第十四节:Behavior的原理</string>
     <string name="btn_course15">第十五节:PhotoView的实现</string>
 
     <string name="skin_title">本地包资源</string>
+    <string name="str_text">我按时打算看的哈是控件的哈可视我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达我按时打算看的哈是控件的哈可视角度哈SD卡获客时代哈可接受的卡仕达</string>
 
 
 </resources>

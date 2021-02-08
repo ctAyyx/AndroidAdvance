@@ -1,5 +1,6 @@
 package com.ct.framework.jetpack2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -82,6 +83,10 @@ class GankIoActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                     .fallbackToDestructiveMigration()
                     .build()
             }
+
+            R.id.btn_gankIo_06 -> {
+                readyGoUserInfo()
+            }
         }
     }
 
@@ -143,5 +148,13 @@ class GankIoActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
+
+    /**
+     * 先 测试 Room 是否支持 通知UI界面更新数据
+     * */
+    private fun readyGoUserInfo() {
+        val intent = Intent(this, UserInfoActivity::class.java)
+        startActivity(intent)
+    }
 
 }
