@@ -57,19 +57,19 @@ class CoroutineActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         //阻塞了当前线程的执行
 //        lifecycleScope.launch {
 //            val name = doWork()
-//            Toast.makeText(this@MainActivity, name, Toast.LENGTH_LONG).show()
+//            Toast.makeText(this@CoroutineActivity, name, Toast.LENGTH_LONG).show()
 //        }
 
         //这里使用协程 我们切换到工作线程
         //协程中的代码会挂起 但是不会影响线程代码的正常执行
-        lifecycleScope.launch {
-            //这里如果我们不主动切换 协程上下文
-            //则从父协程继承 这里是 主线程的作用域
-            //所以 如果做得是耗时操作 则会阻塞主线程
-            val name = withContext(Dispatchers.Default) { doWork() }
-
-            Toast.makeText(this@CoroutineActivity, name, Toast.LENGTH_LONG).show()
-        }
+//        lifecycleScope.launch {
+//            //这里如果我们不主动切换 协程上下文
+//            //则从父协程继承 这里是 主线程的作用域
+//            //所以 如果做得是耗时操作 则会阻塞主线程
+//            val name = withContext(Dispatchers.Default) { doWork() }
+//
+//            Toast.makeText(this@CoroutineActivity, name, Toast.LENGTH_LONG).show()
+//        }
 
 
         //这里校验liveData的扩展
@@ -83,10 +83,10 @@ class CoroutineActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
 
         //现在开始使用 suspend 挂起函数测试
-//        lifecycleScope.launch {
-//            val name = doWork2()
-//            Toast.makeText(this@MainActivity, name, Toast.LENGTH_LONG).show()
-//        }
+        lifecycleScope.launch {
+            val name = doWork2()
+            Toast.makeText(this@CoroutineActivity, name, Toast.LENGTH_LONG).show()
+        }
 
 
 //        liveData {

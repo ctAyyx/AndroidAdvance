@@ -8,14 +8,19 @@ import ct.com.basics.CLog;
 public class ThreadLocalDemo {
 
     private static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Person> threadLocal2 = new ThreadLocal<>();
+    public static Person person = new Person("去哪聚", 40);
 
     public static void main(String[] args) {
 
+        Person person = new Person("AA", 10);
         threadLocal.set(100);
         Thread01 thread01 = new Thread01();
         thread01.setThreadLocal(threadLocal);
+        thread01.setThreadLocal2(threadLocal2, person);
         Thread02 thread02 = new Thread02();
         thread02.setThreadLocal(threadLocal);
+        thread02.setThreadLocal2(threadLocal2, person);
 
         thread01.start();
         thread02.start();
@@ -32,12 +37,15 @@ public class ThreadLocalDemo {
 
         CLog.log("main Thread:" + threadLocal.get());
 
+
     }
 
 
     static class Thread01 extends Thread {
 
         private ThreadLocal<Integer> threadLocal;
+        private ThreadLocal<Person> threadLocal2;
+        private Person person;
 
         private int count = 0;
 
@@ -46,8 +54,16 @@ public class ThreadLocalDemo {
             threadLocal.set(0);
         }
 
+        public void setThreadLocal2(ThreadLocal<Person> threadLocal, Person person) {
+            this.threadLocal2 = threadLocal;
+            this.person = person;
+            CLog.log("Thread01设置的person:" + person);
+            this.threadLocal2.set(person);
+        }
+
         @Override
         public void run() {
+            threadLocal2.set(ThreadLocalDemo.person);
             for (int i = 0; i < 10; i++) {
                 Integer value = threadLocal.get();
                 CLog.log("----->" + value);
@@ -56,25 +72,59 @@ public class ThreadLocalDemo {
                 threadLocal.set(value + 10 * i);
             }
 
+
             CLog.log("Thread01：" + threadLocal.get());
+            CLog.log("Thread01：Person数据" + threadLocal2.get());
         }
     }
 
     static class Thread02 extends Thread {
 
         private ThreadLocal<Integer> threadLocal;
+        private ThreadLocal<Person> threadLocal2;
+        private Person person;
 
         public void setThreadLocal(ThreadLocal<Integer> threadLocal) {
             this.threadLocal = threadLocal;
         }
 
+        public void setThreadLocal2(ThreadLocal<Person> threadLocal, Person person) {
+            this.threadLocal2 = threadLocal;
+            this.person = person;
+            CLog.log("Thread02设置的person:" + person);
+            this.threadLocal2.set(person);
+        }
+
         @Override
         public void run() {
+            threadLocal2.set(ThreadLocalDemo.person);
             for (int i = 0; i < 10; i++) {
                 threadLocal.set(10);
             }
-
+            threadLocal2.get().name = "XXXXXX";
             CLog.log("Thread02：" + threadLocal.get());
+            CLog.log("Thread02：Person数据" + threadLocal2.get());
+
+
         }
     }
+
+    static class Person {
+        public String name;
+        public int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+    }
+
 }

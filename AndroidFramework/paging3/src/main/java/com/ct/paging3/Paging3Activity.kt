@@ -13,6 +13,7 @@ import androidx.lifecycle.observe
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.bumptech.glide.Glide
 import com.ct.paging3.adapter.CategoryAdapter
 import com.ct.paging3.db.AppDatabase
 import com.ct.paging3.di.AppModule
@@ -38,7 +39,6 @@ class Paging3Activity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paging3)
-
         db = Room.databaseBuilder(this, AppDatabase::class.java, "Paging_db").build()
         vm =
             ViewModelProvider(

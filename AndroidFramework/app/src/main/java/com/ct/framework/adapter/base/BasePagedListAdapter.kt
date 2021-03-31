@@ -8,6 +8,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 
 
+/**
+ * 分页库 基础
+ * */
 abstract class BasePagedListAdapter<T, V : ViewDataBinding>(diffCallback: DiffUtil.ItemCallback<T> = CommonDiff()) :
     PagedListAdapter<T, BasePagedListViewHolder<V>>(diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasePagedListViewHolder<V> {

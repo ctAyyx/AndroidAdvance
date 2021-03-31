@@ -3,6 +3,8 @@
     package="com.ct.framework">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".hilt.DiApplication"
@@ -13,25 +15,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".jetpack2.ui.UserInfoActivity">
-
-        </activity>
-        <activity android:name=".lifecycle.LifecycleActivity"></activity>
-        <activity android:name=".adapter.BindActivity"></activity>
-        <activity android:name=".adapter.AdapterActivity" />
-        <activity android:name=".nav.NavActivity">
-
-        </activity>
-        <activity android:name=".binder.IPCClientActivity" />
-        <activity android:name=".room.RoomActivity"></activity>
-        <activity android:name=".work.WorkActivity" />
-        <activity android:name=".hilt.HiltActivity" />
-        <activity android:name=".jetpack2.ui.GankIoActivity" >
+        <activity android:name=".course01_02.Course01Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".jetpack2.ui.UserInfoActivity"></activity>
+        <activity android:name=".lifecycle.LifecycleActivity" />
+        <activity android:name=".adapter.BindActivity" />
+        <activity android:name=".adapter.AdapterActivity" />
+        <activity android:name=".nav.NavActivity"></activity>
+        <activity android:name=".binder.IPCClientActivity" />
+        <activity android:name=".room.RoomActivity" />
+        <activity android:name=".work.WorkActivity" />
+        <activity android:name=".hilt.HiltActivity" />
+        <activity android:name=".jetpack2.ui.GankIoActivity">
+
         </activity>
         <activity android:name=".jetpack.JetpackActivity" />
         <activity android:name=".jetpack.JetpackActivity02" />

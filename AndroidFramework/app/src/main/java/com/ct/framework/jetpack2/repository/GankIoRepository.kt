@@ -28,7 +28,7 @@ class GankIoRepository(
             }
 
             override fun processResponse(response: ApiSuccessResponse<BaseResponse<Detail>>): DetailVo {
-                return response.data.data.run {
+                return response.data.data!!.run {
                     DetailVo(
                         id = id,
                         author = author,
@@ -68,7 +68,7 @@ class GankIoRepository(
             }
 
             override fun processResponse(response: ApiSuccessResponse<BaseResponse<Detail>>): DetailVo {
-                return response.data.data.run {
+                return response.data.data!!.run {
                     DetailVo(
                         id = id,
                         author = author,
@@ -96,7 +96,7 @@ class GankIoRepository(
             }
 
             override fun processResponse(response: BaseResponse<Detail>): DetailVo {
-                return response.data.run {
+                return response.data!!.run {
                     DetailVo(
                         id = id,
                         author = author,

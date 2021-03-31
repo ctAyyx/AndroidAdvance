@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
@@ -63,16 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 emitter.onComplete();
             }
         })
-//                .subscribeOn(
-//                        Schedulers.io()
-//                )
-                .observeOn(
-
-
-                        AndroidSchedulers.mainThread()
-
-
+                .subscribeOn(
+                        Schedulers.io()
                 )
+//                .observeOn(
+//                        AndroidSchedulers.mainThread()
+//                )
                 .subscribe(
                         new Observer<String>() {
                             @Override

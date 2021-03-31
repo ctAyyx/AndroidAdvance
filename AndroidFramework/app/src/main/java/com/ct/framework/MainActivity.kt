@@ -5,6 +5,7 @@ import android.os.Binder
 import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
+import android.view.Choreographer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         toTestFmClick()
         SparseArrayCompat<String>()
         lifecycleHolder.onCreate()
+
+        Choreographer.getInstance().postFrameCallback {
+
+        }
     }
 
     fun onClick(view: View) {

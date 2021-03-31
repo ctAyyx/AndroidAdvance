@@ -12,6 +12,7 @@ import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 
 import ct.com.basics.CLog;
+import ct.com.basics.reflect.vo.B;
 import ct.com.basics.reflect.vo.Person;
 import ct.com.basics.reflect.vo.TestType;
 import ct.com.basics.reflect.vo.Tom;
@@ -36,9 +37,36 @@ class Main {
         //getTypeVariable();
         //getParameterizedType();
         //getGenericArrayType();
-        getWildcardType();
+        //getWildcardType();
 
         //getGenericType();
+
+
+        //测试
+        new Main().doReflect();
+
+       // new B();
+
+    }
+
+
+    /**
+     * 校验 反射创建的类 是否会执行静态代码块 构造方法
+     * <p>
+     * Class.forName 在加载类的时候会执行 静态代码块
+     * ClassLoader  在加载类的时候不会执行 静态代码块
+     */
+    private void doReflect() {
+        try {
+            Class<?> cls = Class.forName("ct.com.basics.reflect.vo.Person");
+//            cls.newInstance();
+//            CLog.log("===========================");
+//            Class<?> cls2 = getClass().getClassLoader().loadClass("ct.com.basics.reflect.vo.Person");
+            //cls2.newInstance();
+ //           CLog.log("===>" + cls2);
+        } catch (Exception e) {
+            CLog.log("异常:" + e);
+        }
     }
 
 
@@ -206,7 +234,7 @@ class Main {
         try {
             Class cls = Class.forName("ct.com.basics.reflect.vo.Tom");
             //获取Class声明的所有公开方法 包括父类的公开方法
-            Method[] methods = cls.getMethods();
+            Method[] methods = cls.getDeclaredMethods();
             for (Method method : methods) {
 
                 CLog.log("获取类声明的公开方法:" + method.getName()

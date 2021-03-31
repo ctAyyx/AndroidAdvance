@@ -59,6 +59,7 @@ class Jetpack01Activity : AppCompatActivity() {
     private fun useDataBinding() {
         //对 DataBinding 的使用
         //源码 如何实现数据自动刷新到界面的??
+
     }
 
 

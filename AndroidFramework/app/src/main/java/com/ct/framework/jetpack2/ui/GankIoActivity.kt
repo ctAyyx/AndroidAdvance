@@ -53,7 +53,6 @@ class GankIoActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gank_io)
-
     }
 
     fun onClick(view: View) {

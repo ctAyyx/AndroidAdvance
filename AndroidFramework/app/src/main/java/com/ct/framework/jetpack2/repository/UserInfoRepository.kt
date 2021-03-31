@@ -22,9 +22,9 @@ class UserInfoRepository
             return BaseResponse(UserInfo(id, "网络数据", 30))
         }
 
-        override fun processResponse(response: BaseResponse<UserInfo>): UserInfo {
-            return response.data
-        }
+//        override fun processResponse(response: BaseResponse<UserInfo>?): UserInfo {
+//            return response!!.data
+//        }
 
         override fun loadFromDb(): LiveData<UserInfo> {
             return dao.getUserInfo(id)
@@ -35,9 +35,14 @@ class UserInfoRepository
             return true
         }
 
-        override suspend fun saveCallResult(data: UserInfo) {
-            // dao.upUserInfo(data)
-            dao.insertUser(data)
+
+
+        override suspend fun saveCallResult(data: UserInfo?) {
+            dao.insertUser(data!!)
+        }
+
+        override suspend fun processResponse(response: BaseResponse<UserInfo>): UserInfo? {
+            return response.data
         }
 
     }

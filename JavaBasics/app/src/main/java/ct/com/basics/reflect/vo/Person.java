@@ -1,5 +1,7 @@
 package ct.com.basics.reflect.vo;
 
+import ct.com.basics.CLog;
+
 /**
  * TIME : 2020/6/13 0013
  * AUTHOR : CT
@@ -12,9 +14,13 @@ public class Person {
     String work;
     protected String address;
     public int height;
+    static {
+        CLog.log("Person 类的静态代码块执行");
+    }
 
 
     public Person() {
+        CLog.log("Person 类的构造方法执行");
     }
 
     public Person(int age, String work) {

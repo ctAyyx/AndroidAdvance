@@ -417,6 +417,7 @@ public class Demo {
 
         Stack<ListNode> s1 = new Stack<>();
         Stack<ListNode> s2 = new Stack<>();
+
         while (l1 != null || l2 != null) {
             if (l1 != null) {
                 s1.push(l1);

@@ -1,4 +1,4 @@
-package ct.com.basics.genericity;
+ package ct.com.basics.genericity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -86,7 +86,7 @@ class LimitDemo {
         //plate.setT(new Apple());
         Fruit fruit = plate.getT();
 
-        Plate<? super Fruit> plate1 = new Plate<>();
+        Plate<? super Fruit> plate1 = new Plate<Food>();
         plate1.setT(new Apple());
         plate1.setT(new Pear());
         // plate1.setT(new Food());

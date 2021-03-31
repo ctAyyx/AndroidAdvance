@@ -11,6 +11,7 @@ import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Supplier;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -87,6 +88,7 @@ public class RxCreateOperator {
         });
         name = "王二";
         observable
+                .subscribeOn(Schedulers.io())
                 .subscribe(createObserver());
 
     }

@@ -28,6 +28,9 @@ import androidx.recyclerview.widget.ListAdapter
 import com.ct.framework.BR
 
 
+/**
+ * 基础列表
+ * */
 abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
     // appExecutors:  Executors,
     diffCallback: DiffUtil.ItemCallback<T> = CommonDiff()

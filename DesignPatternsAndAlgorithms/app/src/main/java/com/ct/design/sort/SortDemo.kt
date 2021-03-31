@@ -1,9 +1,26 @@
 package com.ct.design.sort
 
-import android.R.attr
-
 
 private var ARRAY = intArrayOf(85, 16, 32, 1, 8, 2, 17, 33, 24, 63, 99, 44)
+
+fun demo(arr: IntArray) {
+
+    val size = arr.size
+
+    for (i in 1 until size) {
+        for (j in i - 1 downTo 0) {
+            if (arr[j] < arr[j - 1]) {
+
+            }
+
+        }
+
+
+    }
+
+
+}
+
 
 //https://www.cnblogs.com/guoyaohua/p/8600214.html
 fun main() {
@@ -20,13 +37,14 @@ fun main() {
     //insertSort(ARRAY)
 
     //希尔排序
-    shellSort(ARRAY)
+    //shellSort(ARRAY)
 
     //归并排序
     //ARRAY = mergeSort(ARRAY)
 
     //快速排序
-    quickSort(ARRAY, 0, ARRAY.size-1)
+    //quickSort(ARRAY, 0, ARRAY.size - 1)
+    demo(ARRAY)
     println("排序后:${ARRAY.contentToString()}")
 
 
@@ -165,7 +183,7 @@ private fun quickSort(array: IntArray, start: Int, end: Int) {
     while (low < high) {
         while (index <= array[high] && low < high)
             high--
-        if(low < high){
+        if (low < high) {
             array[low] = array[high]
             low++
 
@@ -174,7 +192,7 @@ private fun quickSort(array: IntArray, start: Int, end: Int) {
         while (index > array[low] && low < high)
             low++
 
-        if(low < high){
+        if (low < high) {
             array[high] = array[low]
             high--
         }
@@ -183,8 +201,8 @@ private fun quickSort(array: IntArray, start: Int, end: Int) {
 
     array[low] = index
 
-    quickSort(array, start, low-1)
-    quickSort(array, low+1, end)
+    quickSort(array, start, low - 1)
+    quickSort(array, low + 1, end)
 
 }
 
