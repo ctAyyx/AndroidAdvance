@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseResponse<T> {
 
-    @SerializedName("data")
+    @SerializedName("datas")
     public T data;
 
 }

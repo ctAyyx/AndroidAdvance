@@ -1,14 +1,10 @@
 package com.ct.framework.jetpack
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.AndroidViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ct.framework.R
 import com.ct.framework.jetpack.adapter.RvCategoryAdapter
@@ -39,8 +35,15 @@ class JetpackActivity : AppCompatActivity() {
         //doVm03()
         btn_01.setOnClickListener {
             //doVm04()
-            doVm05()
+            //doVm05()
+            doVm06()
         }
+        vm.chapter.observe(this, Observer {
+            Log.e(
+                "TAG",
+                "${vm.chapter}获取到doVm06的数据:${it.status} -- ${it.data?.datas?.firstOrNull()} -- ${it.message}"
+            )
+        })
     }
 
     //测试 最基本的MVVM设计模式 接口调用一次
@@ -101,8 +104,13 @@ class JetpackActivity : AppCompatActivity() {
         rv_01.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun doVm06() {
 
+    /******************** 玩Android***********************/
+
+    private var page = 0
+    private fun doVm06() {
+        vm.setId("$page")
+        page++
     }
 
 }

@@ -1,13 +1,11 @@
 package com.ct.framework.jetpack.net
 
 import androidx.lifecycle.LiveData
-import com.ct.framework.jetpack.dto.ApiResponse
-import com.ct.framework.jetpack.dto.BaseResponse
-import com.ct.framework.jetpack.dto.Category
-import com.ct.framework.jetpack.dto.Detail
+import com.ct.framework.jetpack.dto.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 interface ServiceApi {
 
@@ -33,5 +31,11 @@ interface ServiceApi {
 
     @GET("/api/v2/post/{id}")
     fun getGirlDetail03(@Path("id") id: String): LiveData<ApiResponse<Detail>>
+
+    @GET
+    fun getChapterList(
+        @Url url: String
+    ): LiveData<ApiResponse<BaseResponse2<ChapterParent>>>
+
 }
 

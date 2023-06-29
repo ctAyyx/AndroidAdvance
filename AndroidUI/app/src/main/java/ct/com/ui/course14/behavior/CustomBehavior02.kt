@@ -2,12 +2,9 @@ package ct.com.ui.course14.behavior
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CustomCoordinatorLayout
 
 /**
  *
@@ -16,7 +13,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
  *
  * */
 class CustomBehavior02(context: Context?, attrs: AttributeSet?) :
-    CoordinatorLayout.Behavior<View>(context, attrs) {
+    CustomCoordinatorLayout.Behavior<View>(context, attrs) {
 
 
     /**
@@ -24,7 +21,7 @@ class CustomBehavior02(context: Context?, attrs: AttributeSet?) :
      * */
 
     override fun onStartNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
+        coordinatorLayout: CustomCoordinatorLayout,
         child: View,
         directTargetChild: View,
         target: View,
@@ -42,7 +39,7 @@ class CustomBehavior02(context: Context?, attrs: AttributeSet?) :
     }
 
     override fun onNestedPreScroll(
-        coordinatorLayout: CoordinatorLayout,
+        coordinatorLayout: CustomCoordinatorLayout,
         child: View,
         target: View,
         dx: Int,
@@ -54,7 +51,7 @@ class CustomBehavior02(context: Context?, attrs: AttributeSet?) :
     }
 
     override fun onNestedScrollAccepted(
-        coordinatorLayout: CoordinatorLayout,
+        coordinatorLayout: CustomCoordinatorLayout,
         child: View,
         directTargetChild: View,
         target: View,
@@ -75,7 +72,7 @@ class CustomBehavior02(context: Context?, attrs: AttributeSet?) :
      * 处理子控件的测量与布局
      * */
     override fun onMeasureChild(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: View,
         parentWidthMeasureSpec: Int,
         widthUsed: Int,
@@ -97,7 +94,7 @@ class CustomBehavior02(context: Context?, attrs: AttributeSet?) :
      * 处理子控件的事件拦截与响应
      * */
     override fun onInterceptTouchEvent(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: View,
         ev: MotionEvent
     ): Boolean {

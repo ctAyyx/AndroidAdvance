@@ -27,12 +27,17 @@ class MyRecyclerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
+    override fun setNestedScrollingEnabled(enabled: Boolean) {
+        Log.e("MyRecyclerView", "setNestedScrollingEnabled:enabled:$enabled")
+        super.setNestedScrollingEnabled(enabled)
+
+    }
     //================准备开始嵌套滚动 DOWN事件===================
 
-    override fun startNestedScroll(axes: Int): Boolean {
-        Log.e("MyRecyclerView", "startNestedScroll:axes$axes")
-        return super.startNestedScroll(axes)
-    }
+//    override fun startNestedScroll(axes: Int): Boolean {
+//        Log.e("MyRecyclerView", "startNestedScroll:axes$axes")
+//        return super.startNestedScroll(axes)
+//    }
 
     override fun startNestedScroll(axes: Int, type: Int): Boolean {
         Log.e("MyRecyclerView", "startNestedScroll:axes$axes -- type:$type")
@@ -55,18 +60,18 @@ class MyRecyclerView @JvmOverloads constructor(
         return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow, type)
     }
 
-    override fun dispatchNestedPreScroll(
-        dx: Int,
-        dy: Int,
-        consumed: IntArray?,
-        offsetInWindow: IntArray?
-    ): Boolean {
-        Log.e(
-            "MyRecyclerView",
-            "dispatchNestedPreScroll:dx:$dx -- dy:$dy consumed:${consumed?.contentToString()} "
-        )
-        return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
-    }
+//    override fun dispatchNestedPreScroll(
+//        dx: Int,
+//        dy: Int,
+//        consumed: IntArray?,
+//        offsetInWindow: IntArray?
+//    ): Boolean {
+//        Log.e(
+//            "MyRecyclerView",
+//            "dispatchNestedPreScroll:dx:$dx -- dy:$dy consumed:${consumed?.contentToString()} "
+//        )
+//        return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
+//    }
 
     //==============分发滚动事件 MOVE事件===================
 
@@ -92,45 +97,54 @@ class MyRecyclerView @JvmOverloads constructor(
         )
     }
 
-    override fun dispatchNestedScroll(
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int,
-        offsetInWindow: IntArray?
+
+//    override fun dispatchNestedScroll(
+//        dxConsumed: Int,
+//        dyConsumed: Int,
+//        dxUnconsumed: Int,
+//        dyUnconsumed: Int,
+//        offsetInWindow: IntArray?
+//    ): Boolean {
+//        Log.e(
+//            "MyRecyclerView",
+//            "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed  -- dxUnconsumed:$dxUnconsumed --dyUnconsumed:$dyUnconsumed --offsetInWindow${offsetInWindow?.contentToString()} "
+//        )
+//        return super.dispatchNestedScroll(
+//            dxConsumed,
+//            dyConsumed,
+//            dxUnconsumed,
+//            dyUnconsumed,
+//            offsetInWindow
+//        )
+//    }
+
+    override fun dispatchNestedPreFling(velocityX: Float, velocityY: Float): Boolean {
+        Log.e(
+            "MyRecyclerView",
+            "dispatchNestedPreFling "
+        )
+        return super.dispatchNestedPreFling(velocityX, velocityY)
+    }
+
+    override fun dispatchNestedFling(
+        velocityX: Float,
+        velocityY: Float,
+        consumed: Boolean
     ): Boolean {
         Log.e(
             "MyRecyclerView",
-            "dispatchNestedScroll:dxConsumed:$dxConsumed -- dyConsumed:$dyConsumed  -- dxUnconsumed:$dxUnconsumed --dyUnconsumed:$dyUnconsumed --offsetInWindow${offsetInWindow?.contentToString()} "
+            "dispatchNestedFling "
         )
-        return super.dispatchNestedScroll(
-            dxConsumed,
-            dyConsumed,
-            dxUnconsumed,
-            dyUnconsumed,
-            offsetInWindow
-        )
+        return super.dispatchNestedFling(velocityX, velocityY, consumed)
     }
-
-//    override fun dispatchNestedPreFling(velocityX: Float, velocityY: Float): Boolean {
-//        return super.dispatchNestedPreFling(velocityX, velocityY)
-//    }
-//
-//    override fun dispatchNestedFling(
-//        velocityX: Float,
-//        velocityY: Float,
-//        consumed: Boolean
-//    ): Boolean {
-//        return super.dispatchNestedFling(velocityX, velocityY, consumed)
-//    }
 
 
     //=====================停止嵌套滚动 ================
-//    override fun stopNestedScroll(type: Int) {
-//        Log.e("MyRecyclerView", "stopNestedScroll:type:$type ")
-//        super.stopNestedScroll(type)
-//    }
-//
+    override fun stopNestedScroll(type: Int) {
+        Log.e("MyRecyclerView", "stopNestedScroll:type:$type ")
+        super.stopNestedScroll(type)
+    }
+
 //    override fun stopNestedScroll() {
 //        Log.e("MyRecyclerView", "stopNestedScroll ")
 //        super.stopNestedScroll()

@@ -80,7 +80,7 @@ class CanvasBasicView @JvmOverloads constructor(
         //drawLine(canvas)
 
         //画弧形 扇形
-        //drawArc(canvas)
+        drawArc(canvas)
 
         //画 Bitmap
         //drawBitmap(canvas)

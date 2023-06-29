@@ -1,9 +1,10 @@
 package ct.com.ui.course03
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import ct.com.ui.R
 import kotlinx.android.synthetic.main.activity_course03.*
@@ -19,7 +20,15 @@ class Course03Activity : AppCompatActivity() {
     }
 
     fun onClick(view: View) {
-        startActivity(Intent(this, FTaoBaoActivity::class.java))
+        when (view.id) {
+            R.id.btnScrollBase -> {
+                startActivity(Intent(this, ScrollActivity::class.java))
+            }
+            else -> {
+                startActivity(Intent(this, FTaoBaoActivity::class.java))
+            }
+        }
+
     }
 
 

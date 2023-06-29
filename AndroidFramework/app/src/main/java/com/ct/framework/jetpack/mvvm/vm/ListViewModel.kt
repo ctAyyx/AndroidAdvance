@@ -1,13 +1,12 @@
 package com.ct.framework.jetpack.mvvm.vm
 
 import androidx.lifecycle.*
-import androidx.paging.PagedList
 import com.ct.framework.jetpack.dto.Category
+import com.ct.framework.jetpack.dto.ChapterParent
 import com.ct.framework.jetpack.dto.Detail
 import com.ct.framework.jetpack.mvvm.base.AppExecutors
 import com.ct.framework.jetpack.mvvm.base.Resource
 import com.ct.framework.jetpack.mvvm.repository.ListRepository
-import kotlinx.coroutines.*
 
 /**
  * ViewModel 对象为特定的界面组件（如 Fragment 或 Activity）提供数据，并包含数据处理业务逻辑，以与模型进行通信。
@@ -48,6 +47,10 @@ class ListViewModel(repository: ListRepository) : ViewModel() {
         repository.getGirlDetail04(id)
     }
 
+    val chapter: LiveData<Resource<ChapterParent>> = _id.switchMap { id ->
+        repository.getWanChapterList(id, AppExecutors())
+    }
+
 
     /**
      * 下面测试 列表数据
@@ -60,9 +63,6 @@ class ListViewModel(repository: ListRepository) : ViewModel() {
         }
 
     }
-
-
-
 
 
 }

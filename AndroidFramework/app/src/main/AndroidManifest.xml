@@ -16,11 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".course01_02.Course01Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".jetpack2.ui.UserInfoActivity"></activity>
         <activity android:name=".lifecycle.LifecycleActivity" />
@@ -34,7 +30,13 @@
         <activity android:name=".jetpack2.ui.GankIoActivity">
 
         </activity>
-        <activity android:name=".jetpack.JetpackActivity" />
+        <activity android:name=".jetpack.JetpackActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".jetpack.JetpackActivity02" />
         <activity android:name=".MainActivity">
             <intent-filter>

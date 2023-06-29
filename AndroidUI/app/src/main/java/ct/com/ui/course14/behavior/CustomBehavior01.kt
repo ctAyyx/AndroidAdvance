@@ -5,9 +5,10 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.TextView
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CustomCoordinatorLayout
+import androidx.core.view.WindowInsetsCompat
 
 /**
  *
@@ -22,8 +23,16 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
  *
  * */
 class CustomBehavior01(context: Context?, attrs: AttributeSet?) :
-    CoordinatorLayout.Behavior<View>(context, attrs) {
+    CustomCoordinatorLayout.Behavior<View>(context, attrs) {
 
+    companion object {
+        private const val DEBUG = true
+        private const val TAG = "Behavior01"
+        private fun log(log: String, printLog: Boolean = true) {
+            if (DEBUG && printLog)
+                Log.e(TAG, log)
+        }
+    }
 
     /**
      * 处理子控件之间依赖下的交互
@@ -31,24 +40,66 @@ class CustomBehavior01(context: Context?, attrs: AttributeSet?) :
      * */
 
     override fun layoutDependsOn(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: View,
         dependency: View
     ): Boolean {
-        Log.e("TAG", "====>")
-        return dependency is TextView
+        log("layoutDependsOn:$child $dependency")
+        return dependency is LinearLayout
     }
 
     override fun onDependentViewChanged(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: View,
         dependency: View
     ): Boolean {
+        log("onDependentViewChanged:$child $dependency")
         return super.onDependentViewChanged(parent, child, dependency)
     }
 
+    override fun onApplyWindowInsets(
+        coordinatorLayout: CustomCoordinatorLayout,
+        child: View,
+        insets: WindowInsetsCompat
+    ): WindowInsetsCompat {
+        log("onApplyWindowInsets:$child")
+        return super.onApplyWindowInsets(coordinatorLayout, child, insets)
+    }
+
+    /**
+     *处理子控件的测量与布局
+     * */
+    override fun onMeasureChild(
+        parent: CustomCoordinatorLayout,
+        child: View,
+        parentWidthMeasureSpec: Int,
+        widthUsed: Int,
+        parentHeightMeasureSpec: Int,
+        heightUsed: Int
+    ): Boolean {
+        log("onMeasureChild:$child")
+        return super.onMeasureChild(
+            parent,
+            child,
+            parentWidthMeasureSpec,
+            widthUsed,
+            parentHeightMeasureSpec,
+            heightUsed
+        )
+    }
+
+    override fun onLayoutChild(
+        parent: CustomCoordinatorLayout,
+        child: View,
+        layoutDirection: Int
+    ): Boolean {
+        log("onLayoutChild:$child")
+        return super.onLayoutChild(parent, child, layoutDirection)
+    }
+
+
     override fun onDependentViewRemoved(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: View,
         dependency: View
     ) {
@@ -61,7 +112,7 @@ class CustomBehavior01(context: Context?, attrs: AttributeSet?) :
      * */
 
     override fun onStartNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
+        coordinatorLayout: CustomCoordinatorLayout,
         child: View,
         directTargetChild: View,
         target: View,
@@ -79,7 +130,7 @@ class CustomBehavior01(context: Context?, attrs: AttributeSet?) :
     }
 
     override fun onNestedPreScroll(
-        coordinatorLayout: CoordinatorLayout,
+        coordinatorLayout: CustomCoordinatorLayout,
         child: View,
         target: View,
         dx: Int,
@@ -91,7 +142,7 @@ class CustomBehavior01(context: Context?, attrs: AttributeSet?) :
     }
 
     override fun onNestedScrollAccepted(
-        coordinatorLayout: CoordinatorLayout,
+        coordinatorLayout: CustomCoordinatorLayout,
         child: View,
         directTargetChild: View,
         target: View,
@@ -108,33 +159,12 @@ class CustomBehavior01(context: Context?, attrs: AttributeSet?) :
         )
     }
 
-    /**
-     *处理子控件的测量与布局
-     * */
-    override fun onMeasureChild(
-        parent: CoordinatorLayout,
-        child: View,
-        parentWidthMeasureSpec: Int,
-        widthUsed: Int,
-        parentHeightMeasureSpec: Int,
-        heightUsed: Int
-    ): Boolean {
-        return super.onMeasureChild(
-            parent,
-            child,
-            parentWidthMeasureSpec,
-            widthUsed,
-            parentHeightMeasureSpec,
-            heightUsed
-        )
-    }
-
 
     /**
      * 处理子控件的事件拦截与响应
      * */
     override fun onInterceptTouchEvent(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: View,
         ev: MotionEvent
     ): Boolean {

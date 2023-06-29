@@ -23,8 +23,20 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     //可以 同时观察 数据库数据 和 网络数据
     private val result = MediatorLiveData<Resource<ResultType>>()
 
+    //重试
+    private var retry: (() -> Any)? = null
+
+    fun retryAllFailed() {
+        val prevRetry = retry
+        retry = null
+        prevRetry?.invoke()
+    }
+
     init {
         toInit()
+        retry = {
+            toInit()
+        }
     }
 
     private fun toInit() {

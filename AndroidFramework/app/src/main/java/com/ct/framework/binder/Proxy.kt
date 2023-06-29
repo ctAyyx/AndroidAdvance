@@ -3,6 +3,11 @@ package com.ct.framework.binder
 import android.os.IBinder
 import android.os.Parcel
 
+/**
+ *  Proxy   ----> ServiceManagerProxy
+ *  mRemote ----> BinderProxy 也就是Binder对象 里面有一个mObject字段
+ *  mObject ----> BpBinder
+ */
 class Proxy(private val mRemote: IBinder) : IPCInterface {
 
 

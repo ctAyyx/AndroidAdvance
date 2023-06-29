@@ -4,11 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CustomCoordinatorLayout
 
 /**
  *
@@ -17,13 +14,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
  *
  * */
 class CustomBehavior04(context: Context?, attrs: AttributeSet?) :
-    CoordinatorLayout.Behavior<TextView>(context, attrs) {
+    CustomCoordinatorLayout.Behavior<TextView>(context, attrs) {
 
     /**
      * 处理子控件的事件拦截与响应
      * */
     override fun onInterceptTouchEvent(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: TextView,
         ev: MotionEvent
     ): Boolean {
@@ -32,7 +29,7 @@ class CustomBehavior04(context: Context?, attrs: AttributeSet?) :
     }
 
     override fun onTouchEvent(
-        parent: CoordinatorLayout,
+        parent: CustomCoordinatorLayout,
         child: TextView,
         ev: MotionEvent
     ): Boolean {

@@ -60,7 +60,7 @@ class PaintView @JvmOverloads constructor(
         //val shader = getLinearGradient()
 
         //获取 辐射渐变的Shader
-        val shader = getRadialGradient()
+        //val shader = getRadialGradient()
 
         //获取 扫描渐变的Shader
         //val shader = getSweepGradient()
@@ -69,7 +69,7 @@ class PaintView @JvmOverloads constructor(
         //val shader = getBitmapShader()
 
         //获取 混合模式的Shader
-        //val shader = getComposeShader()
+        val shader = getComposeShader()
         mPaint.shader = shader
     }
 
@@ -147,7 +147,7 @@ class PaintView @JvmOverloads constructor(
         //shader1 目标像素
         //shader2 源像素
         //这里的混合模式 参见: https://developer.android.google.cn/reference/android/graphics/PorterDuff.Mode?hl=en#DARKEN
-        val shader = ComposeShader(shader1, shader2, PorterDuff.Mode.SRC_IN)
+        val shader = ComposeShader(shader1, shader2, PorterDuff.Mode.DST_OUT)
         return shader
 
     }

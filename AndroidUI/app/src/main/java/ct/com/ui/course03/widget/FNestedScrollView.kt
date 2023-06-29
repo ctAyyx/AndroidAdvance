@@ -1,18 +1,14 @@
 package ct.com.ui.course03.widget
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.NestedScrollingChild
 import androidx.core.view.NestedScrollingChildHelper
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import ct.com.ui.course03.FlingHelper
-import java.lang.reflect.Field
 
 /**
  * 需要实现淘宝的吸顶效果
@@ -85,6 +81,8 @@ class FNestedScrollView @JvmOverloads constructor(
         //获取 剩余可以滚动的距离
         mDy = (headView.height - scrollY).toFloat()
         Log.e("TAG", "onNestedFling====>$velocityY")
+        if (velocityY > 0f)
+            dispatchFlying()
         return super.dispatchNestedFling(velocityX, velocityY, consumed)
     }
 
@@ -161,9 +159,9 @@ class FNestedScrollView @JvmOverloads constructor(
         super.onScrollChanged(mScrollX, mScrollY, oldX, oldY)
 
         //我们可以在这里在控件滚动的时候 处理Flying事件
-        if (velocityY > 0) {
-            dispatchFlying()
-        }
+//        if (velocityY > 0) {
+//            dispatchFlying()
+//        }
     }
 
     private fun dispatchFlying() {

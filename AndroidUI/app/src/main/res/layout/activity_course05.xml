@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".course05.Course05Activity">
 
@@ -13,5 +14,19 @@
         android:layout_height="wrap_content"
         android:onClick="onClick"
         android:text="@string/btn_course05_01" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvClipBounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#00F0FF"
+        android:lineHeight="20dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="测试ClipBounds的使用"
+        android:textColor="@color/btn_bg_red"
+        android:textSize="16sp" />
 
 </LinearLayout>

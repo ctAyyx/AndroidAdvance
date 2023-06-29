@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#77F7F7"
+    android:orientation="vertical"
+    tools:context=".course03.ScrollActivity">
+
+    <ct.com.ui.course03.scroll.ScrollTextView
+        android:id="@+id/tvBase1"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/btn_bg_red"
+        android:gravity="center"
+        android:text="1\n2\n1\n2\n1\n2\n1\n2\n1\n2\n1\n2\n1\n2\n1\n2\n"
+        android:textSize="16sp" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="滚动" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSpringBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回弹" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:orientation="vertical"
+    android:orientation="vertical"
     tools:context=".course01.Course01Activity">
 
 
     <FrameLayout
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content">
 
 
+
+
         <ct.com.ui.course01.FlowLayout02
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
             android:background="#33FF00FF"
-            android:padding="16dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:padding="16dp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -63,8 +65,8 @@ android:orientation="vertical"
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00FF00"
                 android:layout_margin="16dp"
+                android:background="#00FF00"
                 android:padding="8dp"
 
                 android:text="AV老师和Lance老师" />
@@ -84,6 +86,25 @@ android:orientation="vertical"
                 android:text="走! 大宝剑 13号技师" />
 
         </ct.com.ui.course01.FlowLayout02>
+
+
+
+        <FrameLayout
+            android:id="@+id/fmTest"
+            android:layout_width="100dp"
+            android:background="#F1F1F1"
+            android:clipChildren="false"
+            android:padding="32dp"
+            android:visibility="gone"
+            android:clipToPadding="false"
+            android:layout_height="100dp">
+
+            <View
+                android:id="@+id/viewTest"
+                android:layout_width="200dp"
+                android:background="#03F3F0"
+                android:layout_height="200dp" />
+        </FrameLayout>
 
     </FrameLayout>
 

@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class OverlayLayoutManager : RecyclerView.LayoutManager() {
     //最大重叠数目
-    private val MAX_OVER_SIZE = 4
+    companion object {
+        const val MAX_OVER_SIZE = 4
+        const val TRANS_Y_GAP = 40f
+        const val SCALE_GAP = 0.05f
+    }
 
     override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
         return RecyclerView.LayoutParams(
@@ -45,10 +49,12 @@ class OverlayLayoutManager : RecyclerView.LayoutManager() {
             layoutDecoratedWithMargins(scrap, left, top, right, bottom)
 
             //7. 根据角标 平移缩放ItemView
-            val level = itemCount - i - 1
-            scrap.translationY = level * 200f
-            scrap.scaleX = 1 - level * 0.05f
-            scrap.scaleY = 1 - level * 0.05f
+            var level = itemCount - i - 1
+            if (i + 1 == bottomPosition + 1)
+                level -= 1
+            scrap.translationY = level * TRANS_Y_GAP
+            scrap.scaleX = 1 - level * SCALE_GAP
+            scrap.scaleY = 1 - level *SCALE_GAP
 
 
         }

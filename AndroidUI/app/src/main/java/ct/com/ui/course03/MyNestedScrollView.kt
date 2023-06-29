@@ -168,48 +168,48 @@ class MyNestedScrollView @JvmOverloads constructor(
         )
     }
 
-//    override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
-//        Log.e(
-//            "NestedScrollView",
-//            "onNestedPreFling: target:${target::class.simpleName} --- velocityX:$velocityX --- velocityY:$velocityY "
-//        )
-//        return super.onNestedPreFling(target, velocityX, velocityY)
-//    }
-//
-//    /**
-//     * @param consumed 子控件是否消费了 Flying
-//     * */
-//    override fun onNestedFling(
-//        target: View,
-//        velocityX: Float,
-//        velocityY: Float,
-//        consumed: Boolean
-//    ): Boolean {
-//        Log.e(
-//            "NestedScrollView",
-//            "onNestedFling: target:${target::class.simpleName} --- velocityX:$velocityX --- velocityY:$velocityY -- consumed:$consumed"
-//        )
-//        return super.onNestedFling(target, velocityX, velocityY, consumed)
-//    }
+    override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
+        Log.e(
+            "NestedScrollView",
+            "onNestedPreFling: target:${target::class.simpleName} --- velocityX:$velocityX --- velocityY:$velocityY "
+        )
+        return super.onNestedPreFling(target, velocityX, velocityY)
+    }
+
+    /**
+     * @param consumed 子控件是否消费了 Flying
+     * */
+    override fun onNestedFling(
+        target: View,
+        velocityX: Float,
+        velocityY: Float,
+        consumed: Boolean
+    ): Boolean {
+        Log.e(
+            "NestedScrollView",
+            "onNestedFling: target:${target::class.simpleName} --- velocityX:$velocityX --- velocityY:$velocityY -- consumed:$consumed"
+        )
+        return super.onNestedFling(target, velocityX, velocityY, consumed)
+    }
 
 
     //========================停止嵌套滚动 ======================
 
-//    override fun onStopNestedScroll(target: View) {
-//        Log.e(
-//            "NestedScrollView",
-//            "onStopNestedScroll: target:${target::class.simpleName} "
-//        )
-//        super.onStopNestedScroll(target)
-//    }
-//
-//    override fun onStopNestedScroll(target: View, type: Int) {
-//        Log.e(
-//            "NestedScrollView",
-//            "onStopNestedScroll: target:${target::class.simpleName} --- type:$type"
-//        )
-//        super.onStopNestedScroll(target, type)
-//    }
+    override fun onStopNestedScroll(target: View) {
+        Log.e(
+            "NestedScrollView",
+            "onStopNestedScroll: target:${target::class.simpleName} "
+        )
+        super.onStopNestedScroll(target)
+    }
+
+    override fun onStopNestedScroll(target: View, type: Int) {
+        Log.e(
+            "NestedScrollView",
+            "onStopNestedScroll: target:${target::class.simpleName} --- type:$type"
+        )
+        super.onStopNestedScroll(target, type)
+    }
 
     internal class Log {
         companion object {

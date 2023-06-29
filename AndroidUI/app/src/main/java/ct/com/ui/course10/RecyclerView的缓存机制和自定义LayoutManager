@@ -1,4 +1,19 @@
-一.RecyclerView的缓存 复用机制(缓存复用ViewHolder)
+一.RecyclerView的绘制流程(通常的情况下)
+  1.onMeasure
+        一般的LayoutManager重写了isAutoMeasureEnabled并且返回ture,所以mLayout.onMeasure(默认走Rv的defaultOnMeasure);
+        接下来执行dispatchLayoutStep1(处理Adapter的更新,决定需要播放的动画,保存当前View的信息),完成后 mState.mLayoutStep = State.STEP_LAYOUT,dispatchLayoutStep2()布局处理,完成后mState.mLayoutStep = State.STEP_ANIMATIONS;
+        执行mLayout.setMeasuredDimensionFromChildren确定RV的宽高;
+          (1)如果RV是Wrap_content且ItemView中有AT_MOST的M模式的 我们需要再次执行dispatchLayoutStep2()布局处理,mState.mLayoutStep = State.STEP_ANIMATIONS;执行mLayout.setMeasuredDimensionFromChildren确定RV的宽高;
+  2.onLayout
+        dispatchLayout 这个方法也很重要
+        执行dispatchLayoutStep3(保存信息，触发动画，清除垃圾)  mState.mLayoutStep = State.STEP_START
+
+二.测量和布局都是交给了LayoutManager去处理，这里我们列举LinearLayoutManager
+        onLayoutChildren 开始布局子view 由dispatchLayoutStep2方法触发
+         -> fill 开始填充布局
+          ->layoutChunk  layoutState.next(recycler)获取或创建ViewHolder,然后获取ItemView;测量子控件后，计算出子控件需要布局的坐标 layoutDecoratedWithMargins开始布局
+
+三.RecyclerView的缓存 复用机制(缓存复用ViewHolder)
   1.RecyclerView的复用机制
    a.由onTouchEvent事件进入: 在MOVE事件中-->scrollByInternal()-->scrollStep()-->mLayout.scrollVerticallyBy/scrollHorizontallyBy(这里就直接讨论垂直滚动,LinearLayoutManager)
                                        -->scrollBy()

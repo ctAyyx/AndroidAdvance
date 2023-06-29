@@ -17,7 +17,7 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
     override fun responseType(): Type = responseType
 
     override fun adapt(call: Call<R>): LiveData<ApiResponse<R>> {
-Log.e("TAG","传入的responseType:$responseType")
+        Log.e("TAG", "传入的responseType:$responseType")
         return object : LiveData<ApiResponse<R>>() {
             private var started = AtomicBoolean(false)
             override fun onActive() {
@@ -25,11 +25,12 @@ Log.e("TAG","传入的responseType:$responseType")
                 if (started.compareAndSet(false, true)) {
                     call.enqueue(object : Callback<R> {
                         override fun onFailure(call: Call<R>, t: Throwable) {
+                            Log.e("TAG", "数据请求失败:$t")
                             postValue(ApiResponse.Companion.create(t))
                         }
 
                         override fun onResponse(call: Call<R>, response: Response<R>) {
-
+                            Log.e("TAG", "数据请求完成:${response.code()}")
                             postValue(ApiResponse.Companion.create(response))
                         }
 

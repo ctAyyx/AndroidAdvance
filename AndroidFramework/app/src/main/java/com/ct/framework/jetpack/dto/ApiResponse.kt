@@ -8,10 +8,9 @@ import retrofit2.Response
  * 对响应后的数据处理由用户自己实现
  * */
 sealed class ApiResponse<T>() {
-
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> =
-            ApiErrorResponse(error.message ?: "unknown error")
+            ApiErrorResponse(error.message ?: "unknown error", error)
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
@@ -26,12 +25,11 @@ sealed class ApiResponse<T>() {
                     response.message()
                 else
                     msg
-                ApiErrorResponse(errorMsg ?: "unknown error")
+                ApiErrorResponse(errorMsg ?: "unknown error", NullPointerException())
             }
         }
 
     }
-
 }
 
 /**
@@ -47,4 +45,5 @@ class ApiEmptyResponse<T> : ApiResponse<T>()
 /**
  * 错误的响应数据
  * */
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: String, val throwable: Throwable) :
+    ApiResponse<T>()

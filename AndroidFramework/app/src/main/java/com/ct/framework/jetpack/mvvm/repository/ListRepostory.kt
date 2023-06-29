@@ -3,16 +3,12 @@ package com.ct.framework.jetpack.mvvm.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.PagedList
-import androidx.paging.toLiveData
 import com.ct.framework.jetpack.dto.*
 import com.ct.framework.jetpack.mvvm.base.AppExecutors
 import com.ct.framework.jetpack.mvvm.base.BaseResource
 import com.ct.framework.jetpack.mvvm.base.NetworkBoundResource
 import com.ct.framework.jetpack.mvvm.base.Resource
 import com.ct.framework.jetpack.net.ServiceApi
-import com.ct.framework.jetpack.source.CategoryDataSourceFactory
-import com.ct.framework.jetpack.vo.GirlList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -68,7 +64,7 @@ class ListRepository(private val serviceApi: ServiceApi) {
             }
 
             override fun processResponse(response: ApiSuccessResponse<BaseResponse<Detail>>): Detail =
-                response.data!!.data
+                response.data.data
 
         }
 
@@ -84,7 +80,7 @@ class ListRepository(private val serviceApi: ServiceApi) {
 
             override fun processResponse(response: ApiSuccessResponse<Detail>): Detail {
                 Log.e("TAG", "转换:${response}")
-                return response.data!!
+                return response.data
             }
 
         }
@@ -105,5 +101,20 @@ class ListRepository(private val serviceApi: ServiceApi) {
         return request.asLiveData()
     }
 
+
+    /**************** 玩Android 数据测试 *****************/
+    fun getWanChapterList(page:String,appExecutors: AppExecutors): LiveData<Resource<ChapterParent>> {
+        val request = object :
+            NetworkBoundResource<ChapterParent, BaseResponse2<ChapterParent>>(appExecutors = appExecutors) {
+            override fun createCall(): LiveData<ApiResponse<BaseResponse2<ChapterParent>>> {
+                return serviceApi.getChapterList("https://www.wanandroid.com/article/list/${page}/json")
+            }
+
+            override fun processResponse(response: ApiSuccessResponse<BaseResponse2<ChapterParent>>): ChapterParent {
+                return response.data.data
+            }
+        }
+        return request.asLiveData()
+    }
 
 }
